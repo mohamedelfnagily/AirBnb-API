@@ -1,5 +1,6 @@
 using AirBnb.DAL.Data.Context;
 using AirBnb.DAL.Data.Models;
+using AirBnb.DAL.Repository.Non_Generic.PersonRepo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,10 @@ namespace AirBnb.Api
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
             }).AddEntityFrameworkStores<ApplicationDbContext>();
+            #endregion
+
+            #region Special Repos-Fnagily
+            builder.Services.AddScoped<IPersonRepository, PersonRepository>();
             #endregion
 
             builder.Services.AddControllers();
