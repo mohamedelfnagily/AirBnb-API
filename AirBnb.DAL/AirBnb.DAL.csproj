@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Context\" />
-    <Folder Include="Data\Models\" />
     <Folder Include="Repository\Generic\" />
     <Folder Include="Repository\Non-Generic\" />
   </ItemGroup>
