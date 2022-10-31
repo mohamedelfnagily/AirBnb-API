@@ -30,7 +30,7 @@ namespace AirBnb.BL.DTOs.UserDTOs
         [CheckBdDate(ErrorMessage = "Date Should not be in the future")]
         public DateTime BirthDate { get; set; }
         [Required]
-        [RegularExpression(@"(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})")]
+        [RegularExpression(@"^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$")]
         public string Password { get; set; } = "";
 
         public string? ProfilePicture { get; set; }

@@ -1,3 +1,5 @@
+using AirBnb.BL.Managers.ManageEmployee;
+using AirBnb.BL.Managers.ManageUser;
 using AirBnb.DAL.Data.Context;
 using AirBnb.DAL.Data.Models;
 using AirBnb.DAL.Repository.Non_Generic.PersonRepo;
@@ -22,7 +24,14 @@ namespace AirBnb.Api
             #endregion
 
             #region Identity Class Configuration-Fnagily
-            builder.Services.AddIdentity<Person, IdentityRole>(options =>
+            builder.Services.AddIdentity<Employee, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -33,6 +42,12 @@ namespace AirBnb.Api
 
             #region Special Repos-Fnagily
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+            #endregion
+
+            #region Managers Configs-Whole Team
+            builder.Services.AddScoped<IUserManager, UserManage>();
+            builder.Services.AddScoped<IEmployeeManager, EmployeeManager>();
+            
             #endregion
 
             builder.Services.AddControllers();
