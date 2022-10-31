@@ -19,5 +19,5 @@ namespace AirBnb.BL.DTOs.UserDTOs
         public double Rating { get; set; }
         public double Balance { get; set; }
     }
-    }
-}
+ }
+
