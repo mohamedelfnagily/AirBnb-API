@@ -13,7 +13,7 @@ namespace AirBnb.DAL.Data.Models
     public class Employee:Person
     {
         public double SSN { get; set; }
-        public int Salary { get; set; }
+        public double Salary { get; set; }
 
     }
 }

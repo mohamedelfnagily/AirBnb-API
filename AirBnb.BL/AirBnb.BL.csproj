@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="AutoMapper\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Emails\" />
     <Folder Include="Helpers\" />
     <Folder Include="Managers\" />
