@@ -15,6 +15,14 @@ namespace AirBnb.DAL.Data.Context
         public ApplicationDbContext(DbContextOptions options):base(options)
         {
         }
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    //base.OnModelCreating(builder);
+        //    //builder.Entity<UserLanguage>()
+        //    //    .HasOne<User>(e=>e.id)
+        //    //    .WithMany<UserLanguage>(p=>p.Id)
+        //    //    .HasForeignKey(e=>e.UserId);
+        //}
         public virtual DbSet<Person> Persons { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<Employee> Employees { get; set; } = null!;

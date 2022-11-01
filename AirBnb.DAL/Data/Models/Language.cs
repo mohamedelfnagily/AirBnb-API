@@ -10,10 +10,11 @@ namespace AirBnb.DAL.Data.Models
     {
         public Language()
         {
-            Users = new HashSet<User>();
+            //userLanguages=new HashSet<UserLanguage>();
         }
         public Guid Id { get; set; }
         public string Name { get; set; } = "";
-        public ICollection<User> Users { get; set; }
+        //public ICollection<UserLanguage> userLanguages { get; set; }
+
     }
 }

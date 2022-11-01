@@ -15,7 +15,7 @@ namespace AirBnb.BL.DTOs.UserDTOs
         public string UserName { get; set; } = "";
 
         [Required]
-        [RegularExpression(@"[a-z0-9]+@[a-z]+\.[a-z]{2,3}")]
+        [RegularExpression(@"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$")]
         public string Email { get; set; } = "";
 
         [Required]

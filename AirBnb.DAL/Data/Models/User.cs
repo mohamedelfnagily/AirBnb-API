@@ -16,12 +16,12 @@ namespace AirBnb.DAL.Data.Models
         {
             Reservations = new HashSet<Reservation>();
             Properties = new HashSet<Property>();
-            Languages = new HashSet<Language>();
+            //userLanguages = new HashSet<UserLanguage>();
         }
         public double Rating { get; set; }
         public double Balance { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<Property> Properties { get; set; }
-        public ICollection<Language> Languages { get; set; }
+        //public ICollection<UserLanguage> userLanguages { get; set; }
     }
 }

@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirBnb.DAL.Data.Models
+namespace AirBnb.BL.DTOs.PropertyDTOs
 {
-    public class Property
+    public class PropertyReadDto
     {
-        public Property()
-        {
-            Rooms = new HashSet<Room>();
-            Reservations=new HashSet<Reservation>();
-            Reviews = new HashSet<Review>();    
-        }
-        public Guid Id { get; set; }
         public string Description { get; set; } = "";
         public string Location { get; set; } = "";
         public double Price { get; set; }
@@ -32,14 +24,5 @@ namespace AirBnb.DAL.Data.Models
         public bool PrivateRoom { get; set; }
         public bool SmokeAlarm { get; set; }
         public bool SeaView { get; set; }
-        public ICollection<Room> Rooms { get; set; }
-        [ForeignKey("Hoster")]
-        public string HosterId { get; set; } = "";
-        public User Hoster { get; set; }
-        public ICollection<Reservation> Reservations { get; set; }
-        public ICollection<Review> Reviews { get; set; }
-        [ForeignKey("Category")]
-        public Guid CategoryId { get; set; }
-        public Category Category { get; set; } = null!;
     }
 }
