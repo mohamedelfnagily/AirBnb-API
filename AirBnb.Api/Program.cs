@@ -1,12 +1,14 @@
 using AirBnb.BL.AutoMapper;
 using AirBnb.BL.Emails.Services;
 using AirBnb.BL.Emails.Settings;
+using AirBnb.BL.Managers.ManageCategories;
 using AirBnb.BL.Helpers;
 using AirBnb.BL.Managers.ManageAuthentication;
 using AirBnb.BL.Managers.ManageEmployee;
 using AirBnb.BL.Managers.ManageUser;
 using AirBnb.DAL.Data.Context;
 using AirBnb.DAL.Data.Models;
+using AirBnb.DAL.Repository.Non_Generic.CategoryRepo;
 using AirBnb.DAL.Repository.Non_Generic.PersonRepo;
 using AirBnb.DAL.Repository.Non_Generic.PropertyRepo;
 using Microsoft.AspNetCore.Identity;
@@ -69,7 +71,6 @@ namespace AirBnb.Api
 
             #region Special Repos-Fnagily
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
-            builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
             #endregion
 
             #region AutoMapper Configuration-WholeTeam
@@ -79,36 +80,7 @@ namespace AirBnb.Api
             #region Managers Configs-Whole Team
             builder.Services.AddScoped<IUserManager, UserManage>();
             builder.Services.AddScoped<IEmployeeManager, EmployeeManager>();
-            builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
-            #endregion
-
-            #region JWT Configuration-WholeTeam
-            builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = "AirbBnbDefault";
-                options.DefaultChallengeScheme = "AirbBnbDefault";
-            }).AddJwtBearer("AirbBnbDefault", options =>
-            {
-                SymmetricSecurityKey key = JWTHelper.getKey(builder.Configuration);
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    IssuerSigningKey = key,
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
-            #endregion
-
-            #region Cors Configuration-WholeTeam
-            string AllowPolicy = "Allow";
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy(AllowPolicy, opt =>
-                {
-                    opt.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-                });
-            });
+            
             #endregion
 
             builder.Services.AddControllers();
