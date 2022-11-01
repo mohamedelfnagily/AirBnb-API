@@ -14,6 +14,7 @@ using AirBnb.DAL.Repository.Non_Generic.PropertyRepo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using AirBnb.DAL.Repository.Generic;
 
 namespace AirBnb.Api
 {
@@ -39,20 +40,7 @@ namespace AirBnb.Api
             #endregion
 
             #region Identity Class Configuration-Fnagily
-            //builder.Services.AddIdentity<Employee, IdentityRole>(options =>
-            //{
-            //    options.User.RequireUniqueEmail = true;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Lockout.MaxFailedAccessAttempts = 3;
-            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
-            //}).AddEntityFrameworkStores<ApplicationDbContext>();
-            //builder.Services.AddIdentity<User, IdentityRole>(options =>
-            //{
-            //    options.User.RequireUniqueEmail = true;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Lockout.MaxFailedAccessAttempts = 3;
-            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
-            //}).AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddIdentityCore<Employee>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -71,6 +59,8 @@ namespace AirBnb.Api
 
             #region Special Repos-Fnagily
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            
             #endregion
 
             #region AutoMapper Configuration-WholeTeam
@@ -80,7 +70,37 @@ namespace AirBnb.Api
             #region Managers Configs-Whole Team
             builder.Services.AddScoped<IUserManager, UserManage>();
             builder.Services.AddScoped<IEmployeeManager, EmployeeManager>();
-            
+            builder.Services.AddScoped<ICategoryManager, CategoryManager>();
+            #endregion
+
+            #region Authentication Configs-WholeTeam
+            builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "Default";
+                options.DefaultChallengeScheme = "Default";
+            }).AddJwtBearer("Default", options =>
+            {
+                SymmetricSecurityKey key = JWTHelper.getKey(builder.Configuration);
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = key,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            #endregion
+
+            #region Cors Configuration-WholeTeam
+            string allowPolicy = "AllowAll";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(allowPolicy, p =>
+                {
+                    p.AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                });
+            });
             #endregion
 
             builder.Services.AddControllers();
@@ -96,7 +116,7 @@ namespace AirBnb.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseCors(AllowPolicy);
+            app.UseCors(allowPolicy);
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
