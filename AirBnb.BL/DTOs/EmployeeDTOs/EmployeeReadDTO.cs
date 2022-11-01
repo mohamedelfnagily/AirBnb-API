@@ -20,5 +20,7 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
         public string? ProfilePicture { get; set; }
         public double SSN { get; set; }
         public double Salary { get; set; }
+
+        public string Errors { get; set; } = string.Empty;
     }
 }

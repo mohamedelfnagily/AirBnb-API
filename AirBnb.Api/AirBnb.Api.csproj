@@ -19,4 +19,8 @@
     <ProjectReference Include="..\AirBnb.BL\AirBnb.BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Static Files\" />
+  </ItemGroup>
+
 </Project>

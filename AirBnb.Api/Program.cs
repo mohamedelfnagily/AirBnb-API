@@ -35,14 +35,15 @@ namespace AirBnb.Api
             #region Identity Class Configuration-Fnagily
             builder.Services.AddIdentity<Employee, IdentityRole>(options =>
             {
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
+                
                 options.Password.RequireNonAlphanumeric = false;
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
             }).AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);

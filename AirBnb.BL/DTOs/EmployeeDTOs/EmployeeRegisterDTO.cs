@@ -15,7 +15,7 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
         public string UserName { get; set; } = "";
 
         [Required]
-        [RegularExpression(@"[a-z0-9]+@[a-z]+\.[a-z]{2,3}")]
+        [RegularExpression(@"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$")]
         public string Email { get; set; } = "";
 
         [Required]
@@ -35,11 +35,12 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
 
         public string? ProfilePicture { get; set; }
         [Required]
-        [StringLength(14)]
+     //   [StringLength(14)]
         public double SSN { get; set; }
         [Required]
 
         public double Salary { get; set; }
+        public string Role { get; set; } = "";
 
     }
 }
