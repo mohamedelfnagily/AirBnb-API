@@ -1,5 +1,7 @@
-﻿using AirBnb.BL.DTOs.EmployeeDTOs;
+﻿using AirBnb.BL.DTOs.CategoryDTOs;
+using AirBnb.BL.DTOs.EmployeeDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
+using AirBnb.BL.Managers.ManageCategories;
 using AirBnb.BL.Managers.ManageEmployee;
 using AirBnb.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +15,6 @@ namespace AirBnb.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-       
-        
+
     }
 }

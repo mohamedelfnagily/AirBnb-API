@@ -1,10 +1,12 @@
 using AirBnb.BL.AutoMapper;
 using AirBnb.BL.Emails.Services;
 using AirBnb.BL.Emails.Settings;
+using AirBnb.BL.Managers.ManageCategories;
 using AirBnb.BL.Managers.ManageEmployee;
 using AirBnb.BL.Managers.ManageUser;
 using AirBnb.DAL.Data.Context;
 using AirBnb.DAL.Data.Models;
+using AirBnb.DAL.Repository.Non_Generic.CategoryRepo;
 using AirBnb.DAL.Repository.Non_Generic.PersonRepo;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +54,7 @@ namespace AirBnb.Api
 
             #region Special Repos-Fnagily
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             #endregion
 
             #region AutoMapper Configuration-WholeTeam
@@ -61,6 +64,7 @@ namespace AirBnb.Api
             #region Managers Configs-Whole Team
             builder.Services.AddScoped<IUserManager, UserManage>();
             builder.Services.AddScoped<IEmployeeManager, EmployeeManager>();
+            builder.Services.AddScoped<ICategoryManager, CategoryManager>();
             
             #endregion
 
