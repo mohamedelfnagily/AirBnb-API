@@ -1,3 +1,5 @@
+using AirBnb.BL.Emails.Services;
+using AirBnb.BL.Emails.Settings;
 using AirBnb.BL.Managers.ManageEmployee;
 using AirBnb.BL.Managers.ManageUser;
 using AirBnb.DAL.Data.Context;
@@ -16,6 +18,12 @@ namespace AirBnb.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            #region Email Configuration-Fnagily
+            builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("MailSettings"));
+            builder.Services.AddTransient<IEmailService, EmailService>();
+
+            #endregion
+
             #region Context class Configuration-Fnagily
             builder.Services.AddDbContext<ApplicationDbContext>(opt =>
             {
