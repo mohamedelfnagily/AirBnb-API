@@ -89,6 +89,7 @@ namespace AirBnb.BL.Managers.ManageEmployee
                 return null;
             }
             var  result= await _employeemanager.CreateAsync(myEmp, model.Password);
+
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)

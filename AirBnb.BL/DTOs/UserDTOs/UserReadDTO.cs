@@ -8,7 +8,7 @@ namespace AirBnb.BL.DTOs.UserDTOs
 {
     public class UserReadDTO
     {
-
+        public string Id { get; set; } = "";
         public string UserName { get; set; } = "";
         public string Email { get; set; } = "";
         public string PhoneNumber { get; set; } = "";
@@ -18,6 +18,7 @@ namespace AirBnb.BL.DTOs.UserDTOs
         public string? ProfilePicture { get; set; }
         public double Rating { get; set; }
         public double Balance { get; set; }
+        public string Errors { get; set; } = "";
     }
  }
 
