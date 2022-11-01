@@ -1,3 +1,4 @@
+using AirBnb.BL.AutoMapper;
 using AirBnb.BL.Emails.Services;
 using AirBnb.BL.Emails.Settings;
 using AirBnb.BL.Managers.ManageEmployee;
@@ -50,6 +51,10 @@ namespace AirBnb.Api
 
             #region Special Repos-Fnagily
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+            #endregion
+
+            #region AutoMapper Configuration-WholeTeam
+                builder.Services.AddAutoMapper(typeof(AutoMapperProfiler).Assembly);
             #endregion
 
             #region Managers Configs-Whole Team
