@@ -9,7 +9,7 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
 {
     public class EmployeeReadDTO
     {
-        
+        public string Id { get; set; } = "";
         public string UserName { get; set; } = "";
         public string Email { get; set; } = "";
         
@@ -22,5 +22,7 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
         public double Salary { get; set; }
 
         public string Errors { get; set; } = string.Empty;
+
+        public string Role { get; set; } = "";
     }
 }

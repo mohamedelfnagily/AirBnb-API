@@ -11,6 +11,8 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
     public class EmployeeUpdateDTO
     {
         [Required]
+        public string Id { get; set; } = "";
+        [Required]
         [StringLength(15, MinimumLength = 3)]
         public string UserName { get; set; } = "";
 
@@ -35,10 +37,11 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
 
         public string? ProfilePicture { get; set; }
         [Required]
-        [StringLength(14)]
         public double SSN { get; set; }
         [Required]
 
         public double Salary { get; set; }
+
+        public string Role { get; set; } = "";
     }
 }

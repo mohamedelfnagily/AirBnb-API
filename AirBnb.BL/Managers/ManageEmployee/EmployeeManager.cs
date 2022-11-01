@@ -97,6 +97,7 @@ namespace AirBnb.BL.Managers.ManageEmployee
             };
             await _employeemanager.AddClaimsAsync(myEmp, claims);
             EmployeeReadDTO AddedEmployee = _mapper.Map<EmployeeReadDTO>(myEmp);
+            await GetRole(myEmp, AddedEmployee);
             // Setting Html Welcome Email Body
             // C:\Users\Dell\source\repos\AirBnb-API\AirBnb.Api\Template\EmailTemplate.html'
             var currentDirector = Directory.GetCurrentDirectory().Replace($"AirBnb.Api", "AirBnb.BL");
@@ -117,6 +118,8 @@ namespace AirBnb.BL.Managers.ManageEmployee
             {
                 return null;
             }
+            EmployeeReadDTO deletedEmp = _mapper.Map<EmployeeReadDTO>(emp);
+            await GetRole(emp, deletedEmp);
             var result = await _employeemanager.DeleteAsync(emp);
             if (!result.Succeeded)
             {
@@ -124,14 +127,15 @@ namespace AirBnb.BL.Managers.ManageEmployee
                     errors += $"{error.Description},";
                 return new EmployeeReadDTO { Errors = errors };
             }
-            EmployeeReadDTO deletedEmp = _mapper.Map<EmployeeReadDTO>(emp);
+         
             return deletedEmp;
         }
         //Updating section:
-        public async Task<EmployeeReadDTO> UpdateEmployee(EmployeeUpdateDTO model, string id)
+        public async Task<EmployeeReadDTO> UpdateEmployee(EmployeeUpdateDTO model)
         {
             var errors = string.Empty;
-            Employee emp = await _employeemanager.FindByIdAsync(id);
+            Employee emp = await _employeemanager.FindByIdAsync(model.Id);
+            var claims = await _employeemanager.GetClaimsAsync(emp);
             if (emp == null)
             {
                 return null;
@@ -144,8 +148,27 @@ namespace AirBnb.BL.Managers.ManageEmployee
                     errors += $"{error.Description},";
                 return new EmployeeReadDTO { Errors = errors };
             }
+            await UpdateRole(emp, claims[1], model.Role); // update new role
             EmployeeReadDTO updatedEmployee = _mapper.Map<EmployeeReadDTO>(emp);
+
+            await GetRole(emp, updatedEmployee);
+           
             return updatedEmployee;
+        }
+        //Getting user role from his claims
+        public async Task GetRole(Employee emp, EmployeeReadDTO model)
+        {
+            var claims = await _employeemanager.GetClaimsAsync(emp);
+            var role = claims.Select(e => e.Value).ToList();
+            model.Role = role[1].ToString();
+        }
+        //Updating user claim
+        public async Task UpdateRole(Employee emp, Claim OldClaim, string NewRole)
+        {
+           
+                Claim myClaim = new Claim(ClaimTypes.Role, NewRole);
+                await _employeemanager.ReplaceClaimAsync(emp, OldClaim, myClaim);
+            
         }
 
     }
