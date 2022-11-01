@@ -1,4 +1,5 @@
-﻿using AirBnb.BL.DTOs.UserDTOs;
+﻿using AirBnb.BL.DTOs.EmployeeDTOs;
+using AirBnb.BL.DTOs.UserDTOs;
 using AirBnb.DAL.Data.Models;
 using AutoMapper;
 using System;
@@ -19,6 +20,12 @@ namespace AirBnb.BL.AutoMapper
             CreateMap<User, UserReadDTO>();
             //Converting from update user dto to user
             CreateMap<UserUpdateDTO, User>();
+            //Converting from registerDto to employee
+            CreateMap<EmployeeRegisterDTO, Employee>();
+            //Converting a employee to employee read dto
+            CreateMap<Employee, EmployeeReadDTO>();
+            //Converting from update employee dto to employee
+            CreateMap<EmployeeUpdateDTO, Employee>();
         }
     }
 }
