@@ -15,6 +15,32 @@ namespace AirBnb.Api.Controllers
             this._employeeManager = _employeeManager;
 
         }
+        //Get all Employees
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<IEnumerable<EmployeeReadDTO>>> GetAll()
+        {
+            var result = await _employeeManager.GetAllEmployees();
+            if (result == null)
+            {
+                return Ok();
+            }
+            return Ok(result);
+
+        }
+        // Get Employee By id
+        [HttpGet("GetById/{id}")]
+        public async Task<ActionResult<EmployeeReadDTO>> GetById(string id)
+        {
+            var result = await _employeeManager.GetEmployeeById(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+
+        }
+
+
         // Create Employee 
         [HttpPost("CreateEmployee")]
         public async Task<ActionResult<EmployeeReadDTO>> CreateAsync(EmployeeRegisterDTO model)

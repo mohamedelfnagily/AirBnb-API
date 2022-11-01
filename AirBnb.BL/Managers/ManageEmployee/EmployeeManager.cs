@@ -38,7 +38,7 @@ namespace AirBnb.BL.Managers.ManageEmployee
             EmployeeReadDTO neededEmployee = _mapper.Map<EmployeeReadDTO>(emp);
             return neededEmployee;
         }
-
+        
         public async Task<EmployeeReadDTO> GetEmployeeById(string id)
         {
             Employee emp = await _employeemanager.FindByIdAsync(id);
@@ -47,6 +47,7 @@ namespace AirBnb.BL.Managers.ManageEmployee
                 return null;
             }
             EmployeeReadDTO neededEmployee = _mapper.Map<EmployeeReadDTO>(emp);
+            await GetRole(emp, neededEmployee);
             return neededEmployee;
         }
 
@@ -63,12 +64,17 @@ namespace AirBnb.BL.Managers.ManageEmployee
 
         public async Task<IEnumerable<EmployeeReadDTO>> GetAllEmployees()
         {
-            IEnumerable<Employee> myEmps = await _employeemanager.Users.ToListAsync();
+            List<Employee> myEmps = await _employeemanager.Users.ToListAsync();
             if (myEmps == null)
             {
                 return null;
             }
-            IEnumerable<EmployeeReadDTO> employees = _mapper.Map<IEnumerable<EmployeeReadDTO>>(myEmps);
+
+            List<EmployeeReadDTO> employees = _mapper.Map<List<EmployeeReadDTO>>(myEmps);
+            for(int i = 0; i < myEmps.Count(); i++) // setting the role in the read DTO
+            {
+                await GetRole(myEmps[i], employees[i]);
+            }
 
             return employees;
         }
