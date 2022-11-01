@@ -11,6 +11,8 @@ namespace AirBnb.BL.DTOs.UserDTOs
     public class UserUpdateDTO
     {
         [Required]
+        public string Id { get; set; } = "";
+        [Required]
         [StringLength(15, MinimumLength = 3)]
         public string UserName { get; set; } = "";
 

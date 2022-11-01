@@ -1,4 +1,6 @@
-﻿using AirBnb.BL.DTOs.UserDTOs;
+﻿using AirBnb.BL.DTOs.EmployeeDTOs;
+using AirBnb.BL.DTOs.UserDTOs;
+using AirBnb.BL.Emails.Services;
 using AirBnb.DAL.Data.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -16,10 +18,13 @@ namespace AirBnb.BL.Managers.ManageUser
     {
         private readonly UserManager<User> _usermanager;
         private readonly IMapper _mapper;
-        public UserManage(UserManager<User> usermanager, IMapper mapper)
+        private readonly IEmailService _emailService;
+
+        public UserManage(UserManager<User> usermanager, IMapper mapper,IEmailService emailService)
         {
             _usermanager = usermanager;
             _mapper = mapper;
+            _emailService = emailService;
         }
         //Getting section implementation
         public async Task<UserReadDTO> GetUserByEmail(string email)
@@ -69,28 +74,40 @@ namespace AirBnb.BL.Managers.ManageUser
         //Adding Section:
         public async Task<UserReadDTO> AddNewUser(UserRegisterDTO model)
         {
+            var errors = string.Empty;
             User myUser = _mapper.Map<User>(model);
             if (myUser == null)
             {
                 return null;
             }
-            var AddedUser = await _usermanager.CreateAsync(myUser, model.Password);
-            if (!AddedUser.Succeeded)
+            var result = await _usermanager.CreateAsync(myUser, model.Password);
+            if (!result.Succeeded)
             {
-                return null;
+                foreach (var error in result.Errors)
+                    errors += $"{error.Description},";
+                return new UserReadDTO { Errors = errors };
             }
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier,myUser.Id),
-                new Claim(ClaimTypes.Role,"Customer")
             };
-            var result = await _usermanager.AddClaimsAsync(myUser, claims);
+            await _usermanager.AddClaimsAsync(myUser, claims);
             UserReadDTO AddedUSer = _mapper.Map<UserReadDTO>(myUser);
+            // Setting Html Welcome Email Body
+            // C:\Users\Dell\source\repos\AirBnb-API\AirBnb.Api\Template\EmailTemplate.html'
+            var currentDirector = Directory.GetCurrentDirectory().Replace($"AirBnb.Api", "AirBnb.BL");
+            var filePath = $"{currentDirector}\\Emails\\Template\\EmailTemplate.html";
+            var str = new StreamReader(filePath);
+            var MailText = str.ReadToEnd();
+            str.Close();
+            MailText = MailText.Replace("[name]", model.FirstName + " " + model.LastName).Replace("[email]", model.Email).Replace("[password]", model.Password);
+            await _emailService.SendEmailAsync(model.Email, "Welcome On Board", MailText);
             return AddedUSer;
         }
         //Deleting Section
         public async Task<UserReadDTO> DeleteUser(string id)
         {
+            var errors = string.Empty;
             User user = await _usermanager.FindByIdAsync(id);
             if (user == null)
             {
@@ -99,15 +116,18 @@ namespace AirBnb.BL.Managers.ManageUser
             var result = await _usermanager.DeleteAsync(user);
             if (!result.Succeeded)
             {
-                return null;
+                foreach (var error in result.Errors)
+                    errors += $"{error.Description},";
+                return new UserReadDTO { Errors = errors };
             }
             UserReadDTO deletedUser = _mapper.Map<UserReadDTO>(user);
             return deletedUser;
         }
         //Updating section:
-        public async Task<UserReadDTO> UpdateUser(UserUpdateDTO model, string id)
+        public async Task<UserReadDTO> UpdateUser(UserUpdateDTO model)
         {
-            User user = await _usermanager.FindByIdAsync(id);
+            var errors = string.Empty;
+            User user = await _usermanager.FindByIdAsync(model.Id);
             if (user == null)
             {
                 return null;
@@ -116,7 +136,9 @@ namespace AirBnb.BL.Managers.ManageUser
             var result = await _usermanager.UpdateAsync(user);
             if (!result.Succeeded)
             {
-                return null;
+                foreach (var error in result.Errors)
+                    errors += $"{error.Description},";
+                return new UserReadDTO { Errors = errors };
             }
             UserReadDTO updatedUser = _mapper.Map<UserReadDTO>(user);
             return updatedUser;

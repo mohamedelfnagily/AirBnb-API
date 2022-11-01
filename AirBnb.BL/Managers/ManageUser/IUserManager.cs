@@ -20,6 +20,6 @@ namespace AirBnb.BL.Managers.ManageUser
         //Deleting user
         Task<UserReadDTO> DeleteUser(string id);
         //update existing user
-        Task<UserReadDTO> UpdateUser(UserUpdateDTO model, string id);
+        Task<UserReadDTO> UpdateUser(UserUpdateDTO model);
     }
 }
