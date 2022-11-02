@@ -10,7 +10,8 @@ namespace AirBnb.BL.DTOs.UserDTOs
     public class UserLoginDTO
     {
         [Required]
-        [RegularExpression(@"[a-z0-9]+@[a-z]+\.[a-z]{2,3}")]
+        [RegularExpression(@"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$")]
+
         public string Email { get; set; } = "";
         [Required]
         [RegularExpression(@"^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$")]

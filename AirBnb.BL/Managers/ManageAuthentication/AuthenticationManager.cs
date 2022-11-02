@@ -53,6 +53,11 @@ namespace AirBnb.BL.Managers.ManageAuthentication
             if(EmailExtension==EmailExtensionHelper.EmailExtension)
             {
                 var emp = await _employeemanager.FindByEmailAsync(model.Email);
+                if(emp==null)
+                {
+                    myUserData.Message = "Invalid Email or Password!";
+                    return myUserData;
+                }
                 claims = await _employeemanager.GetClaimsAsync(emp);
                 if (!await _employeemanager.CheckPasswordAsync(emp, model.Password))
                 {
@@ -63,7 +68,12 @@ namespace AirBnb.BL.Managers.ManageAuthentication
             else
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
-                 claims = await _userManager.GetClaimsAsync(user);
+                if (user == null)
+                {
+                    myUserData.Message = "Invalid Email or Password!";
+                    return myUserData;
+                }
+                claims = await _userManager.GetClaimsAsync(user);
                 if (!await _userManager.CheckPasswordAsync(user, model.Password))
                 {
                     myUserData.Message = "Invalid Email or password!";

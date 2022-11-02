@@ -17,7 +17,25 @@ namespace AirBnb.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-       
+        private readonly IAuthenticationManager _authenticationmanager;
+        public AuthenticationController(IAuthenticationManager manager)
+        {
+            _authenticationmanager = manager;
+        }
+        [HttpPost("Login")]
+        public async Task<ActionResult<TokenDto>> LoginUser(UserLoginDTO model)
+        {
+            if(model==null)
+            {
+                return BadRequest();
+            }
+            TokenDto token = await _authenticationmanager.LoginUser(model);
+            if(token.Message!="Success")
+            {
+                return BadRequest(token.Message);
+            }
+            return Ok(token);
+        }
         
     }
 }

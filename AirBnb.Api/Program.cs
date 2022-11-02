@@ -71,6 +71,7 @@ namespace AirBnb.Api
             builder.Services.AddScoped<IUserManager, UserManage>();
             builder.Services.AddScoped<IEmployeeManager, EmployeeManager>();
             builder.Services.AddScoped<ICategoryManager, CategoryManager>();
+            builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
             #endregion
 
             #region Authentication Configs-WholeTeam
