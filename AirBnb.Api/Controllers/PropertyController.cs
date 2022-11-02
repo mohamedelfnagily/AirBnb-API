@@ -34,6 +34,20 @@ namespace AirBnb.Api.Controllers
             IEnumerable<PropertyReadDto> myProps = await _propertymanager.GetAllProperties();
             return Ok(myProps);
         }
+        [HttpPost("AddProperty")]
+        public async Task<ActionResult<PropertyReadDto>> AddProperty(PropertyAddDto model)
+        {
+            if(model==null)
+            {
+                return BadRequest();
+            }
+            PropertyReadDto myProp = await _propertymanager.AddProperty(model);
+            if (myProp.Errors != null)
+            {
+                return BadRequest(myProp.Errors);
+            }
+            return Ok(myProp);
+        }
 
     }
 }

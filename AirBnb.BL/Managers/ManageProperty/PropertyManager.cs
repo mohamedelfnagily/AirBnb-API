@@ -78,8 +78,9 @@ namespace AirBnb.BL.Managers.ManageProperty
             {
                 return new PropertyReadDto { Errors = "Invalid Hoster" };
             }
-            Property newProperty = new Property();
-            newProperty.Id = Guid.NewGuid();
+            Property newProperty = _mapper.Map<Property>(model);
+            newProperty.Id = Guid.NewGuid();            
+             _propertyRepository.Add(newProperty);
             _propertyRepository.Save();
             return _mapper.Map<PropertyReadDto>(newProperty);
         }
