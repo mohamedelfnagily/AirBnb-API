@@ -29,6 +29,22 @@ namespace AirBnb.DAL.Data.Context
                 .HasOne(e => e.User)
                 .WithMany(p => p.userLanguages)
                 .HasForeignKey(e => e.UserId);
+
+            builder.Entity<Category>().HasData( 
+                 new Category {Id= Guid.NewGuid() , Name="Amazing Pools", Description="seaviewairbnb"},
+                 new Category { Id =Guid.NewGuid() , Name = "National Parks", Description = "Nationalparksairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Shared Homes", Description = "Shared Homesairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Amazing Views", Description = "Amazing Viewsairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Bed & breakfasts", Description = "Bed & breakfastsairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Lake", Description = "Lakeairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Farms", Description = "Farmsairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Boats", Description = "Boatsairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Deserts", Description = "Desertsairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Countryside", Description = "Countrysideairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Earth homes", Description = "Earth homesairbnb" },
+                 new Category { Id = Guid.NewGuid(), Name = "Golfing", Description = "Golfing airbnb" }
+                );
+
         }
         public virtual DbSet<Person> Persons { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
