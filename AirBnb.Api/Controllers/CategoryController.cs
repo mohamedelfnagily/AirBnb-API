@@ -55,7 +55,7 @@ namespace AirBnb.Api.Controllers
 
         }
         // Get Properties By Category Name
-        [HttpGet("GetPropertiesByCategoryName")]
+        [HttpGet("GetPropertiesByCategoryName/{CategoryName}")]
         public async Task<ActionResult<CategoryReadDTO>> GetPropertiesByCategoryName(string CategoryName)
         {
             var result = await _categoryManager.GetPropertiesByCategoryName(CategoryName);
