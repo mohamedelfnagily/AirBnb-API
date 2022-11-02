@@ -12,10 +12,11 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
     {
         Task<IEnumerable<Review>> GetAllReviewsAsync(Guid PropertyId);
         Task<IEnumerable<Reservation>> GetAllReservationsAsync(Guid PropertyId);
+
         //Those methods will be used in the filteration of the client
         Task<IEnumerable<Property>> GetPropertiesByNumberOfRooms(int num);
-        Task<IEnumerable<Property>> GetPropertiesByPrice(double num);
-        Task<IEnumerable<Property>> GetPropertiesByEssentials(params bool[] Essentials);
+        Task<IEnumerable<Property>> GetPropertiesByPrice(double minPrice, double maxPrice);
+        Task<IEnumerable<Property>> GetPropertiesByEssentials(params string[] Essentials);
         Task<IEnumerable<Property>> GetPropertiesByType(string type);
         Task<IEnumerable<Property>> GetPropertiesByLanguage(params string[] language);
 
