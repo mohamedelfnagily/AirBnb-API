@@ -53,8 +53,18 @@ namespace AirBnb.Api.Controllers
             var properties = await _propertymanager.FilterByPropertyType(Type);
             return Ok(properties);
         }
-
-
+        [HttpPost("GetByEssentials")]
+        public async Task<ActionResult<IEnumerable<PropertyReadDto>>> GetByEssentials(string[] Essentials)
+        {
+            var properties = await _propertymanager.FilterByEssentials(Essentials);
+            return Ok(properties);
+        }
+        [HttpPost("GetByLanguages")]
+        public async Task<ActionResult<IEnumerable<PropertyReadDto>>> GetByLanguages(string[] Languages)
+        {
+            var properties = await _propertymanager.FilterByLanguages(Languages);
+            return Ok(properties);
+        }
         // Add Property
         [HttpPost("AddProperty")]
         public async Task<ActionResult<PropertyReadDto>> AddProperty(PropertyAddDto model)

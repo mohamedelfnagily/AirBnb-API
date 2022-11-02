@@ -44,14 +44,25 @@ namespace AirBnb.BL.Managers.ManageProperty
             return _mapper.Map<IEnumerable<PropertyReadDto>>(myProps);
         }
         //Filtering Section implementation:
-        public Task<IEnumerable<PropertyReadDto>> FilterByEssentials(params string[] Essentials)
+        public async Task<IEnumerable<PropertyReadDto>> FilterByEssentials(params string[] Essentials)
         {
-            throw new NotImplementedException();
+            if (Essentials == null)
+            {
+                return null;
+            }
+            var properties = await _propertyRepository.GetPropertiesByEssentials(Essentials);
+            return _mapper.Map<IEnumerable<PropertyReadDto>>(properties);
+
         }
 
-        public Task<IEnumerable<PropertyReadDto>> FilterByLanguages(params string[] languages)
+        public async Task<IEnumerable<PropertyReadDto>> FilterByLanguages(params string[] languages)
         {
-            throw new NotImplementedException();
+            if (languages == null)
+            {
+                return null;
+            }
+            var properties = await _propertyRepository.GetPropertiesByLanguage(languages);
+            return _mapper.Map<IEnumerable<PropertyReadDto>>(properties);
         }
 
         public async Task<IEnumerable<PropertyReadDto>> FilterByNumberOfRooms(int numberOfRooms)
