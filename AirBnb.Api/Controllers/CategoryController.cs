@@ -64,6 +64,10 @@ namespace AirBnb.Api.Controllers
             }
 
             var result = await _categoryManager.AddNewCategory(model);
+            if (result.Errors != string.Empty)
+            {
+                return BadRequest(result.Errors);
+            }
 
             return Ok(result);
 
@@ -81,6 +85,10 @@ namespace AirBnb.Api.Controllers
             {
                 return NotFound();
             }
+            if (result.Errors != string.Empty)
+            {
+                return BadRequest(result.Errors);
+            }
 
             return Ok(result);
         }
@@ -89,12 +97,16 @@ namespace AirBnb.Api.Controllers
         [HttpPut("UpdateCategory")]
         public async Task<ActionResult<CategoryReadDTO>> UpdateCategoryAsync(CategoryUpdateDTO model)
         {
-            CategoryReadDTO myCategory = await _categoryManager.UpdateCategory(model);
-            if (myCategory == null)
+            CategoryReadDTO result = await _categoryManager.UpdateCategory(model);
+            if (result == null)
             {
                 return BadRequest();
             }
-            return Ok(myCategory);
+            if (result.Errors != string.Empty)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok(result);
         }
 
 
