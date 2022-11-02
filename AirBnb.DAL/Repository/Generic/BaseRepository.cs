@@ -65,6 +65,8 @@ namespace AirBnb.DAL.Repository.Generic
         public TEntity Delete(Guid id)
         {
             var myEntity = GetById(id);
+            if (myEntity == null)
+                return null;
             _context.Set<TEntity>().Remove(myEntity);
             return myEntity;
         }

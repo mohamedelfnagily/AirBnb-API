@@ -54,19 +54,22 @@ namespace AirBnb.BL.Managers.ManageProperty
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<PropertyReadDto>> FilterByNumberOfRooms(double numberOfRooms)
+        public async Task<IEnumerable<PropertyReadDto>> FilterByNumberOfRooms(int numberOfRooms)
         {
-            throw new NotImplementedException();
+            var properties = await _propertyRepository.GetPropertiesByNumberOfRooms(numberOfRooms);
+            return _mapper.Map<IEnumerable<PropertyReadDto>>(properties);   
         }
 
-        public Task<IEnumerable<PropertyReadDto>> FilterByPrice(double minPrice, double maxPrice)
+        public async Task<IEnumerable<PropertyReadDto>> FilterByPrice(double minPrice, double maxPrice)
         {
-            throw new NotImplementedException();
+            var properties = await _propertyRepository.GetPropertiesByPrice(minPrice, maxPrice);
+            return _mapper.Map<IEnumerable<PropertyReadDto>>(properties);
         }
 
-        public Task<IEnumerable<PropertyReadDto>> FilterByPropertyType(string type)
+        public async Task<IEnumerable<PropertyReadDto>> FilterByPropertyType(string type)
         {
-            throw new NotImplementedException();
+            var properties = await _propertyRepository.GetPropertiesByType(type);
+            return _mapper.Map<IEnumerable<PropertyReadDto>>(properties);
         }
         //Adding Section Implementation:
 
@@ -85,15 +88,26 @@ namespace AirBnb.BL.Managers.ManageProperty
             return _mapper.Map<PropertyReadDto>(newProperty);
         }
         //Delete section implementation:
-        public Task<PropertyReadDto> DeleteProperty(Guid id)
+        public  PropertyReadDto DeleteProperty(Guid id)
         {
-            throw new NotImplementedException();
+           var property = _propertyRepository.Delete(id);
+            if (property == null)
+                return null;
+            _propertyRepository.Save();
+            return   _mapper.Map<PropertyReadDto>(property);
         }
 
         //Update section implementation:
-        public Task<PropertyReadDto> UpdateProperty(PropertyUpdateDto model)
+        public PropertyReadDto UpdateProperty(PropertyUpdateDto model)
         {
-            throw new NotImplementedException();
+            var property = _propertyRepository.GetById(model.Id);
+            if (property == null)
+            {
+                return new PropertyReadDto { Errors = "Property Doesn't Exists" };
+            }
+            _mapper.Map(model, property);
+            _propertyRepository.Save();
+            return _mapper.Map<PropertyReadDto>(property);
         }
         //Getting all reservations for the selected property
         public Task<IEnumerable<ReservationReadDto>> GetAllReservationsAsync(Guid PropertyId)

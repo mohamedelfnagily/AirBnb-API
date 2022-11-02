@@ -17,7 +17,7 @@ namespace AirBnb.BL.Managers.ManageProperty
         Task<PropertyReadDto> GetPropertyById(Guid id);
         Task<IEnumerable<PropertyReadDto>> GetAllProperties();
         //Filteration section:
-        Task<IEnumerable<PropertyReadDto>> FilterByNumberOfRooms(double numberOfRooms);
+        Task<IEnumerable<PropertyReadDto>> FilterByNumberOfRooms(int numberOfRooms);
         Task<IEnumerable<PropertyReadDto>> FilterByPrice(double minPrice, double maxPrice);
         Task<IEnumerable<PropertyReadDto>> FilterByPropertyType(string type);
         Task<IEnumerable<PropertyReadDto>> FilterByEssentials(params string[] Essentials);
@@ -28,9 +28,9 @@ namespace AirBnb.BL.Managers.ManageProperty
         //Adding Section:
         Task<PropertyReadDto> AddProperty(PropertyAddDto model);
         //Deleting Section:
-        Task<PropertyReadDto> DeleteProperty(Guid id);
+        PropertyReadDto DeleteProperty(Guid id);
         //Updating Section:
-        Task<PropertyReadDto> UpdateProperty(PropertyUpdateDto model);
+        PropertyReadDto UpdateProperty(PropertyUpdateDto model);
 
 
 

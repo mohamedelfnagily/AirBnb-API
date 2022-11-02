@@ -8,6 +8,7 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
 {
     public class PropertyUpdateDto
     {
+        public Guid Id { get; set; }
         public string Description { get; set; } = "";
         public string Location { get; set; } = "";
         public double Price { get; set; }
@@ -24,5 +25,6 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
         public bool PrivateRoom { get; set; }
         public bool SmokeAlarm { get; set; }
         public bool SeaView { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

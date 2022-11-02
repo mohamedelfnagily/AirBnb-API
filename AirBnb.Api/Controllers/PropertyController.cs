@@ -34,6 +34,28 @@ namespace AirBnb.Api.Controllers
             IEnumerable<PropertyReadDto> myProps = await _propertymanager.GetAllProperties();
             return Ok(myProps);
         }
+        // Filtering Section
+        [HttpPost("GetByNumberOfRooms")]
+        public async Task<ActionResult<IEnumerable<PropertyReadDto>>> GetByNumberOfRooms([FromBody] int rooms)
+        {
+            var properties = await _propertymanager.FilterByNumberOfRooms(rooms);
+            return Ok(properties);
+        }
+        [HttpPost("GetByPriceRange")]
+        public async Task<ActionResult<IEnumerable<PropertyReadDto>>> GetByPriceRange(FilterByPriceDTO model )
+        {
+            var properties = await _propertymanager.FilterByPrice(model.MinPrice,model.MaxPrice);
+            return Ok(properties);
+        }
+        [HttpPost("GetByPropertyType")]
+        public async Task<ActionResult<IEnumerable<PropertyReadDto>>> GetByPropertyType([FromBody] string Type)
+        {
+            var properties = await _propertymanager.FilterByPropertyType(Type);
+            return Ok(properties);
+        }
+
+
+        // Add Property
         [HttpPost("AddProperty")]
         public async Task<ActionResult<PropertyReadDto>> AddProperty(PropertyAddDto model)
         {
@@ -47,6 +69,39 @@ namespace AirBnb.Api.Controllers
                 return BadRequest(myProp.Errors);
             }
             return Ok(myProp);
+        }
+
+        // update property 
+        [HttpPut("UpdateProperty")]
+        public ActionResult<PropertyReadDto> UpdateProperty(PropertyUpdateDto model)
+        {
+            if (model == null)
+            {
+                return BadRequest();
+            }
+            PropertyReadDto myProp = _propertymanager.UpdateProperty(model);
+            if (myProp.Errors != null)
+            {
+                return BadRequest(myProp.Errors);
+            }
+            return Ok(myProp);
+
+        }
+        // Delete Property 
+        [HttpDelete("DeleteProperty")]
+        public ActionResult<PropertyReadDto> DeleteProperty(Guid id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            var property = _propertymanager.DeleteProperty(id);
+            if (property == null)
+            {
+                return NotFound();
+            }
+            return Ok(property);
+
         }
 
     }
