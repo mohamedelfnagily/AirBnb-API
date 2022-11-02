@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using AirBnb.DAL.Repository.Generic;
+using AirBnb.BL.Managers.ManageProperty;
 
 namespace AirBnb.Api
 {
@@ -71,7 +72,7 @@ namespace AirBnb.Api
             #region Special Repos-Fnagily
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-            
+            builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
             #endregion
 
             #region AutoMapper Configuration-WholeTeam
@@ -83,6 +84,7 @@ namespace AirBnb.Api
             builder.Services.AddScoped<IEmployeeManager, EmployeeManager>();
             builder.Services.AddScoped<ICategoryManager, CategoryManager>();
             builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
+            builder.Services.AddScoped<IPropertyManager, PropertyManager>();
             #endregion
 
             #region Authentication Configs-WholeTeam

@@ -9,12 +9,11 @@ namespace AirBnb.DAL.Data.Models
 {
     public class UserLanguage
     {
-        //[ForeignKey("User")]
-        //public string UserId { get; set; } = "";
-        //public User User { get; set; } = null!;
-        //[ForeignKey("LanguageId")]
-        //public Guid LanguageId { get; set; }
-        //public Language Language { get; set; } = null!;
-
+        [ForeignKey("User")]
+        public string UserId { get; set; } = "";
+        public User User { get; set; } = null!;
+        [ForeignKey("Language")]
+        public Guid LanguageId { get; set; }
+        public Language Language { get; set; } = null!;
     }
 }

@@ -24,5 +24,6 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
         public bool PrivateRoom { get; set; }
         public bool SmokeAlarm { get; set; }
         public bool SeaView { get; set; }
+        public string Errors { get; set; }
     }
 }
