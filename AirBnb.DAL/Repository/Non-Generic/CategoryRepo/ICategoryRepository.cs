@@ -11,5 +11,10 @@ namespace AirBnb.DAL.Repository.Non_Generic.CategoryRepo
     public interface ICategoryRepository: IBaseRepository<Category>
     {
         Task<Category> GetCategoryByName(string name);
+        Category? GetCategoryByPropertyId(Guid id);
+        Category? GetCategoryByPropertyName(string Name);
+       // Task<IEnumerable<Property>> GetPropertiesByCategoryId(Guid id);
     }
+
+   
 }

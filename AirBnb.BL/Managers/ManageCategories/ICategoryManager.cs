@@ -1,4 +1,5 @@
 ﻿using AirBnb.BL.DTOs.CategoryDTOs;
+using AirBnb.BL.DTOs.CategoryProperties;
 using AirBnb.BL.DTOs.EmployeeDTOs;
 using AirBnb.DAL.Data.Models;
 using System;
@@ -27,6 +28,7 @@ namespace AirBnb.BL.Managers.ManageCategories
 
         //update existing Category
         Task<CategoryReadDTO> UpdateCategory(CategoryUpdateDTO model);
+   
 
        
     }

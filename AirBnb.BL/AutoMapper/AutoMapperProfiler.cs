@@ -1,4 +1,5 @@
 ﻿using AirBnb.BL.DTOs.CategoryDTOs;
+using AirBnb.BL.DTOs.CategoryProperties;
 using AirBnb.BL.DTOs.EmployeeDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
 using AirBnb.DAL.Data.Models;
@@ -41,6 +42,8 @@ namespace AirBnb.BL.AutoMapper
 
             //Converting from add category dto to category
             CreateMap<CategoryAddDTO, Category>();
+            //Converting from property  to PropertyCategories
+            CreateMap<Property, PropertyCategories>();
         }
     }
 }
