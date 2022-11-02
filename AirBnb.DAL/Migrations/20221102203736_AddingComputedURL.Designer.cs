@@ -4,6 +4,7 @@ using AirBnb.DAL.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirBnb.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221102203736_AddingComputedURL")]
+    partial class AddingComputedURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +41,7 @@ namespace AirBnb.DAL.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("nvarchar(max)")
-                        .HasComputedColumnSql("CONCAT(TRIM(Name),'.jpg') ");
+                        .HasComputedColumnSql("CONCAT(Name,'.jpg') ");
 
                     b.HasKey("Id");
 
@@ -48,84 +50,84 @@ namespace AirBnb.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4d426a09-edaf-4089-a3fa-bdbeae999770"),
+                            Id = new Guid("21e02ac0-2570-4300-bf39-63aced0a988c"),
                             Description = "seaviewairbnb",
                             Name = "Amazing Pools",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("fb7944e8-71f6-4654-8d86-d912062e3ec6"),
+                            Id = new Guid("58d0a9a3-53be-4fb9-bd68-52e76fa6feee"),
                             Description = "Nationalparksairbnb",
                             Name = "National Parks",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("4caa1440-4694-4840-848e-d57f91e7fb0c"),
+                            Id = new Guid("b4b89a41-615b-4cef-8bd8-6e6a1f3e191c"),
                             Description = "Shared Homesairbnb",
                             Name = "Shared Homes",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("e7e106e1-7996-4a89-b1a9-0912af450740"),
+                            Id = new Guid("8eff8bf2-37f3-4eb8-9baa-221cc474ac69"),
                             Description = "Amazing Viewsairbnb",
                             Name = "Amazing Views",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("ed8159f7-0b0f-4bd0-b33d-8ab4832040c5"),
+                            Id = new Guid("7865d847-b2a4-4fed-b2c9-a6a8115130f4"),
                             Description = "Bed & breakfastsairbnb",
                             Name = "Bed & breakfasts",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("6209bb3d-15f1-4746-be55-e1120ed2f502"),
+                            Id = new Guid("df924d0e-c99c-48f4-b77e-b2e876967476"),
                             Description = "Lakeairbnb",
                             Name = "Lake",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("c97eef28-bfd2-4ff6-a538-b757a60a9ed0"),
+                            Id = new Guid("344a216c-e4bf-4c9d-ae73-e6951e815c99"),
                             Description = "Farmsairbnb",
                             Name = "Farms",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("3a8fcd42-79b5-4866-945a-c41bff55b7ad"),
+                            Id = new Guid("578a3795-87de-4aee-8b47-910333674365"),
                             Description = "Boatsairbnb",
                             Name = "Boats",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("fc45bdfb-a1b5-4f8a-af39-a0c1b482df48"),
+                            Id = new Guid("ae2d1a2c-4816-49c4-83b6-f3df97741414"),
                             Description = "Desertsairbnb",
                             Name = "Deserts",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("7ecaddc7-7563-4101-851f-bc9b9f799b69"),
+                            Id = new Guid("6a3bf9d1-770e-4626-b876-e7a8afeb5c5b"),
                             Description = "Countrysideairbnb",
                             Name = "Countryside",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("b3acd953-2e69-4748-bafa-0438f77cb965"),
+                            Id = new Guid("c41d7604-6bf5-4b60-959d-57a1522628ef"),
                             Description = "Earth homesairbnb",
                             Name = "Earth homes",
                             URL = ""
                         },
                         new
                         {
-                            Id = new Guid("6a1bec58-38ac-41ca-be93-ffdb1055e809"),
+                            Id = new Guid("8dfa37c7-fd86-4d39-85b7-eba5ff6703e6"),
                             Description = "Golfing airbnb",
                             Name = "Golfing",
                             URL = ""

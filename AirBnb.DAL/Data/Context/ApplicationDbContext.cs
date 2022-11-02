@@ -44,7 +44,7 @@ namespace AirBnb.DAL.Data.Context
                  new Category { Id = Guid.NewGuid(), Name = "Earth homes", Description = "Earth homesairbnb" },
                  new Category { Id = Guid.NewGuid(), Name = "Golfing", Description = "Golfing airbnb" }
                 );
-
+            builder.Entity<Category>().Property(e => e.URL).HasComputedColumnSql("CONCAT(TRIM(Name),'.jpg') ");
         }
         public virtual DbSet<Person> Persons { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
