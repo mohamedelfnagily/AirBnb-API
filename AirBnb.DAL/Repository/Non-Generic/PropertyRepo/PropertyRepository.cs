@@ -87,5 +87,7 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
             var myProps = await _context.Properties.Where(e => e.PropertyType==type).ToListAsync();
             return myProps;
         }
+
+    
     }
 }

@@ -22,6 +22,7 @@ namespace AirBnb.BL.Managers.ManageProperty
         Task<IEnumerable<PropertyReadDto>> FilterByPropertyType(string type);
         Task<IEnumerable<PropertyReadDto>> FilterByEssentials(params string[] Essentials);
         Task<IEnumerable<PropertyReadDto>> FilterByLanguages(params string[] languages);
+        
         //Getting dependencies:
         Task<IEnumerable<ReviewReadDto>> GetAllReviewsAsync(Guid PropertyId);
         Task<IEnumerable<ReservationReadDto>> GetAllReservationsAsync(Guid PropertyId);

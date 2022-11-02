@@ -2,6 +2,7 @@
 using AirBnb.BL.DTOs.ReservationDTOs;
 using AirBnb.BL.DTOs.ReviewDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
+using AirBnb.BL.Managers.ManageCategories;
 using AirBnb.BL.Managers.ManageUser;
 using AirBnb.DAL.Data.Models;
 using AirBnb.DAL.Repository.Non_Generic.PropertyRepo;
@@ -19,11 +20,13 @@ namespace AirBnb.BL.Managers.ManageProperty
         private readonly IPropertyRepository _propertyRepository;
         private readonly IMapper _mapper;
         private readonly IUserManager _usermanager;
-        public PropertyManager(IPropertyRepository propertyRepository,IMapper map,IUserManager manager)
+        private readonly ICategoryManager _categoryManager;
+        public PropertyManager(IPropertyRepository propertyRepository,IMapper map,IUserManager manager,ICategoryManager categoryManager)
         {
             _propertyRepository = propertyRepository;
             _mapper = map;
             _usermanager = manager;
+            _categoryManager = categoryManager;
         }
 
         //Getting Section implementation:
@@ -82,6 +85,7 @@ namespace AirBnb.BL.Managers.ManageProperty
             var properties = await _propertyRepository.GetPropertiesByType(type);
             return _mapper.Map<IEnumerable<PropertyReadDto>>(properties);
         }
+     
         //Adding Section Implementation:
 
         public async Task<PropertyReadDto> AddProperty(PropertyAddDto model)
@@ -131,6 +135,6 @@ namespace AirBnb.BL.Managers.ManageProperty
             throw new NotImplementedException();
         }
 
-
+        
     }
 }

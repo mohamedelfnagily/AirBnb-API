@@ -20,5 +20,6 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
         Task<IEnumerable<Property>> GetPropertiesByType(string type);
         Task<IEnumerable<Property>> GetPropertiesByLanguage(params string[] language);
 
+
     }
 }

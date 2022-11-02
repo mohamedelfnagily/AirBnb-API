@@ -27,29 +27,37 @@ namespace AirBnb.DAL.Repository.Non_Generic.CategoryRepo
 
         public Category GetCategoryByPropertyId(Guid id)
         {
-            Category myCategory = _context.Categories.Include(e=>e.Properties).FirstOrDefault(e=>e.Id == id); 
-            return myCategory;
+           // var myCategory = _context.Categories.Include(e => e.Properties).ToList(); 
+            var property = _context.Properties.Include(e=>e.Category).Where(e=>e.Id== id).FirstOrDefault();
+            var category = property.Category;
+
+            return category;
         }
 
-        public Category GetCategoryByPropertyName(string name)
+  
+
+        public async Task<IEnumerable<Property>> GetPropertiesByCategoryName(string name)
         {
-            Category myCategory = _context.Categories.Include(e => e.Properties).FirstOrDefault(e => e.Name == name);
-            return myCategory;
+           var category =  await GetCategoryByName(name);
+            if (category == null)
+                return null;
+           var properties = await  _context.Properties.Where(e => e.CategoryId == category.Id).ToListAsync();
+           return properties;
         }
 
 
-    //    public IEnumerable<Property> GetPropertiesByCategoryId(Guid id)
-    //    {
-    //        Property Properties= await _context.Properties.Include(e=>e.Category).FirstOrDefault(e => e.Id == id);
-    //        return Properties;
-    //    }
+        //    public IEnumerable<Property> GetPropertiesByCategoryId(Guid id)
+        //    {
+        //        Property Properties= await _context.Properties.Include(e=>e.Category).FirstOrDefault(e => e.Id == id);
+        //        return Properties;
+        //    }
 
-    //    public Task<IEnumerable<Property>> AddPropertiesToCategory(List<Property> properties, Guid id)
-    //    {
-    //        var myCategory = _context.Categories.Where(e => e.Id == id);
-            
+        //    public Task<IEnumerable<Property>> AddPropertiesToCategory(List<Property> properties, Guid id)
+        //    {
+        //        var myCategory = _context.Categories.Where(e => e.Id == id);
 
 
-    //    }
+
+        //    }
     }
 }

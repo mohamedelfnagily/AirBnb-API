@@ -1,6 +1,7 @@
 ﻿using AirBnb.BL.DTOs.CategoryDTOs;
 using AirBnb.BL.DTOs.CategoryProperties;
 using AirBnb.BL.DTOs.EmployeeDTOs;
+using AirBnb.BL.DTOs.PropertyDTOs;
 using AirBnb.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace AirBnb.BL.Managers.ManageCategories
         Task<CategoryReadDTO> GetCategoryById(Guid id);
         Task<CategoryReadDTO> GetCategoryByName(string name);
         Task<IEnumerable<CategoryReadDTO>> GetAllCategories();
+        Task<IEnumerable<PropertyReadDto>> GetPropertiesByCategoryName(string CategoryName);
 
         //Adding new Category
         Task<CategoryReadDTO> AddNewCategory(CategoryAddDTO model);

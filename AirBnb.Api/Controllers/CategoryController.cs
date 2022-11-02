@@ -54,6 +54,18 @@ namespace AirBnb.Api.Controllers
             return Ok(result);
 
         }
+        // Get Properties By Category Name
+        [HttpGet("GetPropertiesByCategoryName")]
+        public async Task<ActionResult<CategoryReadDTO>> GetPropertiesByCategoryName(string CategoryName)
+        {
+            var result = await _categoryManager.GetPropertiesByCategoryName(CategoryName);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+
+        }
         // add category 
         [HttpPost("addCategory")]
         public async Task<ActionResult<CategoryReadDTO>> addCategory(CategoryAddDTO model)

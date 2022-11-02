@@ -1,4 +1,5 @@
 ﻿using AirBnb.BL.DTOs.CategoryDTOs;
+using AirBnb.BL.DTOs.PropertyDTOs;
 using AirBnb.DAL.Data.Models;
 using AirBnb.DAL.Repository.Non_Generic.CategoryRepo;
 using AutoMapper;
@@ -54,6 +55,11 @@ namespace AirBnb.BL.Managers.ManageCategories
             }
             CategoryReadDTO myCategory = _mapper.Map<CategoryReadDTO>(category);
             return myCategory;
+        }
+        public async Task<IEnumerable<PropertyReadDto>> GetPropertiesByCategoryName(string CategoryName)
+        {
+           var properties = await _categoryRepository.GetPropertiesByCategoryName(CategoryName);
+            return _mapper.Map<IEnumerable<PropertyReadDto>>(properties);
         }
 
         public async Task<CategoryReadDTO> AddNewCategory(CategoryAddDTO model)
