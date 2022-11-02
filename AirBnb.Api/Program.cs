@@ -26,6 +26,17 @@ namespace AirBnb.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            #region Cors Configuration-WholeTeam
+            string allowPolicy = "AllowAll";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(allowPolicy, p =>
+                {
+                    p.AllowAnyMethod().AllowAnyHeader().AllowCredentials().SetIsOriginAllowed((hosts) => true);
+                });
+            });
+            #endregion
+
             #region Email Configuration-Fnagily
             builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("MailSettings"));
             builder.Services.AddTransient<IEmailService, EmailService>();
@@ -90,17 +101,6 @@ namespace AirBnb.Api
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
-            });
-            #endregion
-
-            #region Cors Configuration-WholeTeam
-            string allowPolicy = "AllowAll";
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy(allowPolicy, p =>
-                {
-                    p.AllowAnyMethod().AllowAnyHeader().AllowCredentials();
-                });
             });
             #endregion
 
