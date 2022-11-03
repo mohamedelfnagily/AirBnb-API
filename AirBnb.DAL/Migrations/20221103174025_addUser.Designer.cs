@@ -4,6 +4,7 @@ using AirBnb.DAL.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirBnb.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221103174025_addUser")]
+    partial class addUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,7 @@ namespace AirBnb.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Language", b =>
@@ -58,7 +60,7 @@ namespace AirBnb.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages", (string)null);
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Person", b =>
@@ -210,7 +212,7 @@ namespace AirBnb.DAL.Migrations
 
                     b.HasIndex("HosterId");
 
-                    b.ToTable("Properties", (string)null);
+                    b.ToTable("Properties");
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.PropertyPicture", b =>
@@ -229,7 +231,7 @@ namespace AirBnb.DAL.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("PropertyPictures", (string)null);
+                    b.ToTable("PropertyPictures");
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Reservation", b =>
@@ -250,7 +252,7 @@ namespace AirBnb.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations", (string)null);
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Review", b =>
@@ -275,7 +277,7 @@ namespace AirBnb.DAL.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Room", b =>
@@ -301,7 +303,7 @@ namespace AirBnb.DAL.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.UserLanguage", b =>
@@ -316,7 +318,7 @@ namespace AirBnb.DAL.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("UserLanguages", (string)null);
+                    b.ToTable("UserLanguages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -462,7 +464,7 @@ namespace AirBnb.DAL.Migrations
                     b.Property<double>("Salary")
                         .HasColumnType("float");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.User", b =>
@@ -475,7 +477,7 @@ namespace AirBnb.DAL.Migrations
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
