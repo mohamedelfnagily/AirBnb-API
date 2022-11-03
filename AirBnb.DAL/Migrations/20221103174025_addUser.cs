@@ -18,6 +18,10 @@ namespace AirBnb.DAL.Migrations
                 table: "Users",
                 columns: new[] { "Id", "Balance", "Rating" },
                 values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0.0, 0.0 });
+            migrationBuilder.InsertData(
+              table: "AspNetUserClaims",
+              columns: new[] { "UserId", "ClaimType", "ClaimValue" },
+              values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", "b74ddd14-6340-4840-95c2-db12554843e5" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
