@@ -28,7 +28,7 @@ namespace AirBnb.Api.Controllers
             }
             return Ok(myProp);
         }
-        [HttpGet]
+        [HttpGet("GetAllProperties")]
         public async Task<ActionResult<IEnumerable<PropertyReadDto>>> GetAllProperties()
         {
             IEnumerable<PropertyReadDto> myProps = await _propertymanager.GetAllProperties();
