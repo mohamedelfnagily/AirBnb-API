@@ -34,7 +34,7 @@ namespace AirBnb.BL.Managers.ManageProperty
         //Getting Section implementation:
         public async Task<PropertyReadDto> GetPropertyById(Guid id)
         {
-            Property myProperty = await _propertyRepository.GetByIdAsync(id);
+            Property myProperty = await _propertyRepository.GetPropertyByIdIncludingPics(id);
             
             if(myProperty == null)
             {
@@ -52,7 +52,7 @@ namespace AirBnb.BL.Managers.ManageProperty
 
         public async Task<IEnumerable<PropertyReadDto>> GetAllProperties()
         {
-            IEnumerable<Property> myProps = await _propertyRepository.GetAllAsync();
+            IEnumerable<Property> myProps = await _propertyRepository.GetAllPropertiesByIdIncludingPics();
             return _mapper.Map<IEnumerable<PropertyReadDto>>(myProps);
         }
         //Filtering Section implementation:
@@ -100,14 +100,23 @@ namespace AirBnb.BL.Managers.ManageProperty
         public async Task<PropertyReadDto> AddProperty(PropertyAddDto model)
         {
             UserReadDTO myUser = await _usermanager.GetUserById(model.HosterId);
-            
             if(myUser == null)
             {
                 return new PropertyReadDto { Errors = "Invalid Hoster" };
             }
             Property newProperty = _mapper.Map<Property>(model);
-            newProperty.Id = Guid.NewGuid();            
-             _propertyRepository.Add(newProperty);
+            newProperty.Id = Guid.NewGuid();
+            //Managing pictures
+            if (model.Pictures.Count() > 0)
+            {
+                foreach (var picture in model.Pictures)
+                {
+                    using var dataStream = new MemoryStream();
+                    await picture.CopyToAsync(dataStream);
+                    newProperty.Pictures.Add(new PropertyPicture { Id = Guid.NewGuid(), Picture = dataStream.ToArray(), PropertyId = newProperty.Id });
+                }
+            }
+            _propertyRepository.Add(newProperty);
             _propertyRepository.Save();
             return _mapper.Map<PropertyReadDto>(newProperty);
         }

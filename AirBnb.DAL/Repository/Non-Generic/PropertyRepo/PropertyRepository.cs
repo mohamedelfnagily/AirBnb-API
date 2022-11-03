@@ -23,6 +23,18 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
         {
             _context = context;
         }
+        //Getting Property including it's pictures
+        public async Task<Property> GetPropertyByIdIncludingPics(Guid PropertyId)
+        {
+            return await _context.Properties.Include(p => p.Pictures).FirstOrDefaultAsync(e => e.Id == PropertyId);
+        }
+
+        public async Task<IEnumerable<Property>> GetAllPropertiesByIdIncludingPics()
+        {
+            return await _context.Properties.Include(p => p.Pictures).ToListAsync();
+
+        }
+
         //Getting all the reservations of this property
         public async Task<IEnumerable<Reservation>> GetAllReservationsAsync(Guid PropertyId)
         {
@@ -88,6 +100,6 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
             return myProps;
         }
 
-    
+
     }
 }

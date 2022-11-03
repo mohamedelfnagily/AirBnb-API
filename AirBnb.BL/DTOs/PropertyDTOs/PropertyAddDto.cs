@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AirBnb.BL.DTOs.PropertyPicsDTOs;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +28,6 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
         public bool SeaView { get; set; }
         public Guid CategoryId { get; set; }
         public string HosterId { get; set; } = "";
-
-
+        public IEnumerable<IFormFile> Pictures { get; set; } = new HashSet<IFormFile>();
     }
 }

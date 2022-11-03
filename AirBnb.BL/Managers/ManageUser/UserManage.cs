@@ -154,6 +154,14 @@ namespace AirBnb.BL.Managers.ManageUser
                 return null;
             }
             _mapper.Map(model, user);
+            if (model.ProfilePicture != null)
+            {
+                using var dataStream = new MemoryStream();
+
+                await model.ProfilePicture.CopyToAsync(dataStream);
+
+                user.ProfilePicture = dataStream.ToArray();
+            }
             var result = await _usermanager.UpdateAsync(user);
             if (!result.Succeeded)
             {

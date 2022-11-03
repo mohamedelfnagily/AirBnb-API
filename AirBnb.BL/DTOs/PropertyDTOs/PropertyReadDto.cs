@@ -1,4 +1,5 @@
-﻿using AirBnb.BL.DTOs.UserDTOs;
+﻿using AirBnb.BL.DTOs.PropertyPicsDTOs;
+using AirBnb.BL.DTOs.UserDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,8 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
         public bool PrivateRoom { get; set; }
         public bool SmokeAlarm { get; set; }
         public bool SeaView { get; set; }
-        public string Errors { get; set; }
+        public string Errors { get; set; } = "";
         public UserReadDTO Hoster { get; set; } = null!;
+        public IEnumerable<PropertyPictureReadDto> Pictures { get; set; } = new HashSet<PropertyPictureReadDto>();
     }
 }

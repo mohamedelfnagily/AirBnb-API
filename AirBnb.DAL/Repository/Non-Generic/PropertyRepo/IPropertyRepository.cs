@@ -10,6 +10,11 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
 {
     public interface IPropertyRepository:IBaseRepository<Property>
     {
+        //Getting property including pictures
+        Task<Property> GetPropertyByIdIncludingPics(Guid PropertyId);
+
+        Task<IEnumerable<Property>> GetAllPropertiesByIdIncludingPics();
+
         Task<IEnumerable<Review>> GetAllReviewsAsync(Guid PropertyId);
         Task<IEnumerable<Reservation>> GetAllReservationsAsync(Guid PropertyId);
 

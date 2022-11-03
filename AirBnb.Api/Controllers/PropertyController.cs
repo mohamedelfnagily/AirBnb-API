@@ -22,7 +22,7 @@ namespace AirBnb.Api.Controllers
                 return BadRequest();
             }
             PropertyReadDto myProp = await _propertymanager.GetPropertyById(id);
-            if(myProp.Errors!=null)
+            if(myProp.Errors!=String.Empty)
             {
                 return BadRequest(myProp.Errors);
             }
@@ -67,14 +67,14 @@ namespace AirBnb.Api.Controllers
         }
         // Add Property
         [HttpPost("AddProperty")]
-        public async Task<ActionResult<PropertyReadDto>> AddProperty(PropertyAddDto model)
+        public async Task<ActionResult<PropertyReadDto>> AddProperty([FromForm]PropertyAddDto model)
         {
             if(model==null)
             {
                 return BadRequest();
             }
             PropertyReadDto myProp = await _propertymanager.AddProperty(model);
-            if (myProp.Errors != null)
+            if (myProp.Errors != String.Empty)
             {
                 return BadRequest(myProp.Errors);
             }
