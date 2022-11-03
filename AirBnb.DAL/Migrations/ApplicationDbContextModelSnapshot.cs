@@ -44,92 +44,6 @@ namespace AirBnb.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4d426a09-edaf-4089-a3fa-bdbeae999770"),
-                            Description = "seaviewairbnb",
-                            Name = "Amazing Pools",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("fb7944e8-71f6-4654-8d86-d912062e3ec6"),
-                            Description = "Nationalparksairbnb",
-                            Name = "National Parks",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("4caa1440-4694-4840-848e-d57f91e7fb0c"),
-                            Description = "Shared Homesairbnb",
-                            Name = "Shared Homes",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("e7e106e1-7996-4a89-b1a9-0912af450740"),
-                            Description = "Amazing Viewsairbnb",
-                            Name = "Amazing Views",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("ed8159f7-0b0f-4bd0-b33d-8ab4832040c5"),
-                            Description = "Bed & breakfastsairbnb",
-                            Name = "Bed & breakfasts",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("6209bb3d-15f1-4746-be55-e1120ed2f502"),
-                            Description = "Lakeairbnb",
-                            Name = "Lake",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("c97eef28-bfd2-4ff6-a538-b757a60a9ed0"),
-                            Description = "Farmsairbnb",
-                            Name = "Farms",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("3a8fcd42-79b5-4866-945a-c41bff55b7ad"),
-                            Description = "Boatsairbnb",
-                            Name = "Boats",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("fc45bdfb-a1b5-4f8a-af39-a0c1b482df48"),
-                            Description = "Desertsairbnb",
-                            Name = "Deserts",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("7ecaddc7-7563-4101-851f-bc9b9f799b69"),
-                            Description = "Countrysideairbnb",
-                            Name = "Countryside",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("b3acd953-2e69-4748-bafa-0438f77cb965"),
-                            Description = "Earth homesairbnb",
-                            Name = "Earth homes",
-                            URL = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("6a1bec58-38ac-41ca-be93-ffdb1055e809"),
-                            Description = "Golfing airbnb",
-                            Name = "Golfing",
-                            URL = ""
-                        });
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Language", b =>
@@ -200,8 +114,8 @@ namespace AirBnb.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -305,12 +219,11 @@ namespace AirBnb.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<Guid>("PropertyId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("URL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -587,7 +500,7 @@ namespace AirBnb.DAL.Migrations
             modelBuilder.Entity("AirBnb.DAL.Data.Models.PropertyPicture", b =>
                 {
                     b.HasOne("AirBnb.DAL.Data.Models.Property", "Property")
-                        .WithMany()
+                        .WithMany("Pictures")
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -732,6 +645,8 @@ namespace AirBnb.DAL.Migrations
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Property", b =>
                 {
+                    b.Navigation("Pictures");
+
                     b.Navigation("Reservations");
 
                     b.Navigation("Reviews");

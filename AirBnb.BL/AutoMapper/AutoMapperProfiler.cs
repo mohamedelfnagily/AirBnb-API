@@ -18,7 +18,7 @@ namespace AirBnb.BL.AutoMapper
         public AutoMapperProfiler()
         {
             //Converting from registerDto to user
-            CreateMap<UserRegisterDTO, User>();
+            CreateMap<UserRegisterDTO, User>().ForMember(src => src.ProfilePicture, opt => opt.Ignore()); ;
 
             //Converting a user to urser read dto
             CreateMap<User, UserReadDTO>();

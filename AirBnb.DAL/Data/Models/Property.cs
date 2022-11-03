@@ -13,7 +13,8 @@ namespace AirBnb.DAL.Data.Models
         {
             Rooms = new HashSet<Room>();
             Reservations=new HashSet<Reservation>();
-            Reviews = new HashSet<Review>();    
+            Reviews = new HashSet<Review>();
+            Pictures=new HashSet<PropertyPicture>();
         }
         public Guid Id { get; set; }
         public string Description { get; set; } = "";
@@ -41,5 +42,6 @@ namespace AirBnb.DAL.Data.Models
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
         public Category Category { get; set; } = null!;
+        public ICollection<PropertyPicture> Pictures { get; set; }
     }
 }

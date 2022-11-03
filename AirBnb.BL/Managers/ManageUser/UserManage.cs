@@ -85,7 +85,19 @@ namespace AirBnb.BL.Managers.ManageUser
         public async Task<UserReadDTO> AddNewUser(UserRegisterDTO model)
         {
             var errors = string.Empty;
+            //This variable is a bridge to use data stream out of the condition
+            MemoryStream myMemoryStream = new MemoryStream();
+            if (model.ProfilePicture != null)
+            {
+                using var dataStream = new MemoryStream();
+                await model.ProfilePicture.CopyToAsync(dataStream);
+                myMemoryStream = dataStream;
+            }
             User myUser = _mapper.Map<User>(model);
+            if(model.ProfilePicture!=null)
+            {
+                myUser.ProfilePicture = myMemoryStream.ToArray();
+            }
             if (myUser == null)
             {
                 return null;
@@ -104,7 +116,6 @@ namespace AirBnb.BL.Managers.ManageUser
             await _usermanager.AddClaimsAsync(myUser, claims);
             UserReadDTO AddedUSer = _mapper.Map<UserReadDTO>(myUser);
             // Setting Html Welcome Email Body
-            // C:\Users\Dell\source\repos\AirBnb-API\AirBnb.Api\Template\EmailTemplate.html'
             var currentDirector = Directory.GetCurrentDirectory().Replace($"AirBnb.Api", "AirBnb.BL");
             var filePath = $"{currentDirector}\\Emails\\Template\\EmailTemplate.html";
             var str = new StreamReader(filePath);

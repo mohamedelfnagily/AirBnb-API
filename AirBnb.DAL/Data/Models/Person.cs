@@ -17,6 +17,6 @@ namespace AirBnb.DAL.Data.Models
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";
         public DateTime BirthDate { get; set; }
-        public string? ProfilePicture { get; set; } = "";
+        public byte[]? ProfilePicture { get; set; } = null!;
     }
 }

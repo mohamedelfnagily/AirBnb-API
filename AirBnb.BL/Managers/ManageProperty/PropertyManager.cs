@@ -6,6 +6,7 @@ using AirBnb.BL.Managers.ManageCategories;
 using AirBnb.BL.Managers.ManageUser;
 using AirBnb.DAL.Data.Models;
 using AirBnb.DAL.Repository.Non_Generic.PropertyRepo;
+using AirBnb.DAL.Repository.Non_Generic.UserRepo;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace AirBnb.BL.Managers.ManageProperty
         private readonly IMapper _mapper;
         private readonly IUserManager _usermanager;
         private readonly ICategoryManager _categoryManager;
+
         public PropertyManager(IPropertyRepository propertyRepository,IMapper map,IUserManager manager,ICategoryManager categoryManager)
         {
             _propertyRepository = propertyRepository;
@@ -33,11 +35,18 @@ namespace AirBnb.BL.Managers.ManageProperty
         public async Task<PropertyReadDto> GetPropertyById(Guid id)
         {
             Property myProperty = await _propertyRepository.GetByIdAsync(id);
+            
             if(myProperty == null)
             {
                 return null;
             }
+            UserReadDTO myUser = await _usermanager.GetUserById(myProperty.HosterId);
+            if (myUser == null)
+            {
+                return null;
+            }
             PropertyReadDto myProp = _mapper.Map<PropertyReadDto>(myProperty);
+            myProp.Hoster = myUser;
             return myProp;
         }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirBnb.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221101131131_AddingAllModels")]
-    partial class AddingAllModels
+    [Migration("20221103144851_seedingCategories")]
+    partial class seedingCategories
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,12 @@ namespace AirBnb.DAL.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("URL")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComputedColumnSql("CONCAT(TRIM(Name),'.jpg') ");
 
                     b.HasKey("Id");
 
@@ -110,8 +116,8 @@ namespace AirBnb.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -215,12 +221,11 @@ namespace AirBnb.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<Guid>("PropertyId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("URL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -301,19 +306,19 @@ namespace AirBnb.DAL.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("LanguageUser", b =>
+            modelBuilder.Entity("AirBnb.DAL.Data.Models.UserLanguage", b =>
                 {
-                    b.Property<Guid>("LanguagesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UsersId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("LanguagesId", "UsersId");
+                    b.Property<Guid>("LanguageId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("UsersId");
+                    b.HasKey("UserId", "LanguageId");
 
-                    b.ToTable("LanguageUser");
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("UserLanguages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -497,7 +502,7 @@ namespace AirBnb.DAL.Migrations
             modelBuilder.Entity("AirBnb.DAL.Data.Models.PropertyPicture", b =>
                 {
                     b.HasOne("AirBnb.DAL.Data.Models.Property", "Property")
-                        .WithMany()
+                        .WithMany("Pictures")
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -542,19 +547,23 @@ namespace AirBnb.DAL.Migrations
                     b.Navigation("Property");
                 });
 
-            modelBuilder.Entity("LanguageUser", b =>
+            modelBuilder.Entity("AirBnb.DAL.Data.Models.UserLanguage", b =>
                 {
-                    b.HasOne("AirBnb.DAL.Data.Models.Language", null)
-                        .WithMany()
-                        .HasForeignKey("LanguagesId")
+                    b.HasOne("AirBnb.DAL.Data.Models.Language", "Language")
+                        .WithMany("userLanguages")
+                        .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AirBnb.DAL.Data.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
+                    b.HasOne("AirBnb.DAL.Data.Models.User", "User")
+                        .WithMany("userLanguages")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Language");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -631,8 +640,15 @@ namespace AirBnb.DAL.Migrations
                     b.Navigation("Properties");
                 });
 
+            modelBuilder.Entity("AirBnb.DAL.Data.Models.Language", b =>
+                {
+                    b.Navigation("userLanguages");
+                });
+
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Property", b =>
                 {
+                    b.Navigation("Pictures");
+
                     b.Navigation("Reservations");
 
                     b.Navigation("Reviews");
@@ -645,6 +661,8 @@ namespace AirBnb.DAL.Migrations
                     b.Navigation("Properties");
 
                     b.Navigation("Reservations");
+
+                    b.Navigation("userLanguages");
                 });
 #pragma warning restore 612, 618
         }

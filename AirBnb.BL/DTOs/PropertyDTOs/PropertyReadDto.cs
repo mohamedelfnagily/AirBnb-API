@@ -27,6 +27,6 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
         public bool SmokeAlarm { get; set; }
         public bool SeaView { get; set; }
         public string Errors { get; set; }
-        public string HosterId { get; set; } = "";
+        public UserReadDTO Hoster { get; set; } = null!;
     }
 }

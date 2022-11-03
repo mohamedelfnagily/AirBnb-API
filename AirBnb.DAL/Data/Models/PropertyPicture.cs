@@ -10,7 +10,7 @@ namespace AirBnb.DAL.Data.Models
     public class PropertyPicture
     {
         public Guid Id { get; set; }
-        public string URL { get; set; } = "";
+        public byte[]? Picture { get; set; } = null!;
         [ForeignKey("Property")]
         public Guid PropertyId { get; set; }
         public Property Property { get; set; } = null!;

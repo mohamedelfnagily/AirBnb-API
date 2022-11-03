@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirBnb.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221102173831_seedingCategory")]
-    partial class seedingCategory
+    [Migration("20221103144644_addingUpdatedDatabase")]
+    partial class addingUpdatedDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,83 +37,15 @@ namespace AirBnb.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("URL")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComputedColumnSql("CONCAT(TRIM(Name),'.jpg') ");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("106e03d7-d135-4b9a-8720-30e8ca6036f2"),
-                            Description = "seaviewairbnb",
-                            Name = "Amazing Pools"
-                        },
-                        new
-                        {
-                            Id = new Guid("5e3db886-11aa-400a-993f-46f9fb0bad63"),
-                            Description = "Nationalparksairbnb",
-                            Name = "National Parks"
-                        },
-                        new
-                        {
-                            Id = new Guid("9a7d55b8-3d18-43f5-9b42-9902aea693db"),
-                            Description = "Shared Homesairbnb",
-                            Name = "Shared Homes"
-                        },
-                        new
-                        {
-                            Id = new Guid("49c27bbd-6259-494b-8125-f7c47cfa151c"),
-                            Description = "Amazing Viewsairbnb",
-                            Name = "Amazing Views"
-                        },
-                        new
-                        {
-                            Id = new Guid("09bf7a7f-444c-457c-829e-172b7ac1e860"),
-                            Description = "Bed & breakfastsairbnb",
-                            Name = "Bed & breakfasts"
-                        },
-                        new
-                        {
-                            Id = new Guid("95dc944e-31d3-4ebf-a4da-96ab4cf57704"),
-                            Description = "Lakeairbnb",
-                            Name = "Lake"
-                        },
-                        new
-                        {
-                            Id = new Guid("b8b0c4c4-ee34-46b3-b0f6-df1edcc5f113"),
-                            Description = "Farmsairbnb",
-                            Name = "Farms"
-                        },
-                        new
-                        {
-                            Id = new Guid("862e053b-3731-4f26-8fab-03c9097464f4"),
-                            Description = "Boatsairbnb",
-                            Name = "Boats"
-                        },
-                        new
-                        {
-                            Id = new Guid("96b89961-54cc-4ee5-af9b-2a039532c6fd"),
-                            Description = "Desertsairbnb",
-                            Name = "Deserts"
-                        },
-                        new
-                        {
-                            Id = new Guid("0767f5fe-131e-4492-96e5-6c781cab1872"),
-                            Description = "Countrysideairbnb",
-                            Name = "Countryside"
-                        },
-                        new
-                        {
-                            Id = new Guid("e0a147e4-1485-4622-b868-da9979145a77"),
-                            Description = "Earth homesairbnb",
-                            Name = "Earth homes"
-                        },
-                        new
-                        {
-                            Id = new Guid("079c1514-36ca-499c-990e-9e7425d46bbf"),
-                            Description = "Golfing airbnb",
-                            Name = "Golfing"
-                        });
                 });
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Language", b =>
@@ -184,8 +116,8 @@ namespace AirBnb.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("ProfilePicture")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -289,12 +221,11 @@ namespace AirBnb.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<Guid>("PropertyId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("URL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -571,7 +502,7 @@ namespace AirBnb.DAL.Migrations
             modelBuilder.Entity("AirBnb.DAL.Data.Models.PropertyPicture", b =>
                 {
                     b.HasOne("AirBnb.DAL.Data.Models.Property", "Property")
-                        .WithMany()
+                        .WithMany("Pictures")
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -716,6 +647,8 @@ namespace AirBnb.DAL.Migrations
 
             modelBuilder.Entity("AirBnb.DAL.Data.Models.Property", b =>
                 {
+                    b.Navigation("Pictures");
+
                     b.Navigation("Reservations");
 
                     b.Navigation("Reviews");

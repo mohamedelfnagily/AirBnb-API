@@ -1,4 +1,5 @@
 ﻿using AirBnb.BL.Validations;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +33,8 @@ namespace AirBnb.BL.DTOs.UserDTOs
         [Required]
         [RegularExpression(@"^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$")]
         public string Password { get; set; } = "";
-
-        public string? ProfilePicture { get; set; }
+        [CheckImageExtensionValidator(ErrorMessage ="Extension must be .jpg/.png only!")]
+        [CheckImageSizeValidator(ErrorMessage ="File size is too large to be attached")]
+        public IFormFile? ProfilePicture { get; set; }
     }
 }

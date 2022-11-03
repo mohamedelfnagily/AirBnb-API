@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace AirBnb.BL.DTOs.UserDTOs
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";
         public DateTime BirthDate { get; set; }
-        public string? ProfilePicture { get; set; }
+        public byte[]? ProfilePicture { get; set; }
         public double Rating { get; set; }
         public double Balance { get; set; }
         public string Errors { get; set; } = "";

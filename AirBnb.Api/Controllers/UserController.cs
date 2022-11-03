@@ -43,7 +43,7 @@ namespace AirBnb.Api.Controllers
 
         // Create User 
         [HttpPost("CreateUser")]
-        public async Task<ActionResult<UserRegisterDTO>> CreateAsync(UserRegisterDTO model)
+        public async Task<ActionResult<UserRegisterDTO>> CreateAsync([FromForm]UserRegisterDTO model)
         {
             if (model == null)
             {
