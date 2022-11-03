@@ -51,6 +51,7 @@ namespace AirBnb.BL.AutoMapper
             CreateMap<PropertyUpdateDto, Property>();
             //convert from property to property categories
             CreateMap<Property, PropertyCategories>();
+            
         }
     }
 }

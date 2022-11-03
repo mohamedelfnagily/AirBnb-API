@@ -19,6 +19,7 @@ namespace AirBnb.BL.DTOs.UserDTOs
         public double Rating { get; set; }
         public double Balance { get; set; }
         public string Errors { get; set; } = "";
+        public IEnumerable<UserLanguagesDTO> Languagues { get; set; }= new HashSet<UserLanguagesDTO>();
     }
  }
 

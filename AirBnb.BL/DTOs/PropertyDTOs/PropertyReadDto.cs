@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirBnb.BL.DTOs.UserDTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,5 +26,6 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
         public bool SmokeAlarm { get; set; }
         public bool SeaView { get; set; }
         public string Errors { get; set; }
+        public string HosterId { get; set; } = "";
     }
 }

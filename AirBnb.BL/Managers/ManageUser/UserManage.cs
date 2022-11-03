@@ -1,7 +1,9 @@
 ﻿using AirBnb.BL.DTOs.EmployeeDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
 using AirBnb.BL.Emails.Services;
+using AirBnb.BL.Managers.ManageLanguage;
 using AirBnb.DAL.Data.Models;
+using AirBnb.DAL.Repository.Non_Generic.UserRepo;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,12 +21,16 @@ namespace AirBnb.BL.Managers.ManageUser
         private readonly UserManager<User> _usermanager;
         private readonly IMapper _mapper;
         private readonly IEmailService _emailService;
+        private readonly IUserRepository _userRepository;
+        private readonly ILanguageManager _languageManager;
 
-        public UserManage(UserManager<User> usermanager, IMapper mapper,IEmailService emailService)
+        public UserManage(UserManager<User> usermanager, IMapper mapper,IEmailService emailService, IUserRepository userRepository, ILanguageManager languageManager)
         {
             _usermanager = usermanager;
             _mapper = mapper;
             _emailService = emailService;
+            _userRepository = userRepository;
+            _languageManager = languageManager;
         }
         //Getting section implementation
         public async Task<UserReadDTO> GetUserByEmail(string email)
@@ -40,12 +46,16 @@ namespace AirBnb.BL.Managers.ManageUser
 
         public async Task<UserReadDTO> GetUserById(string id)
         {
-            User user = await _usermanager.FindByIdAsync(id);
+            User user = await _userRepository.GetUserWithLanguageById(id);
+
             if (user == null)
             {
                 return null;
             }
+            var LanguagesIds = user.userLanguages.Select(e => e.LanguageId).ToList();
+            var userLanguages = _languageManager.GetLanguagesNamesByIds(LanguagesIds);
             UserReadDTO neededUser = _mapper.Map<UserReadDTO>(user);
+            neededUser.Languagues = userLanguages;
             return neededUser;
         }
 

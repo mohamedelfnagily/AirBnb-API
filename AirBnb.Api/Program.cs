@@ -16,6 +16,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using AirBnb.DAL.Repository.Generic;
 using AirBnb.BL.Managers.ManageProperty;
+using AirBnb.DAL.Repository.Non_Generic.UserRepo;
+using AirBnb.DAL.Repository.Non_Generic.LanguageRepo;
+using AirBnb.BL.Managers.ManageLanguage;
 
 namespace AirBnb.Api
 {
@@ -73,10 +76,12 @@ namespace AirBnb.Api
             builder.Services.AddScoped<IPersonRepository, PersonRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
             #endregion
 
             #region AutoMapper Configuration-WholeTeam
-                builder.Services.AddAutoMapper(typeof(AutoMapperProfiler).Assembly);
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfiler).Assembly);
             #endregion
 
             #region Managers Configs-Whole Team
@@ -85,6 +90,8 @@ namespace AirBnb.Api
             builder.Services.AddScoped<ICategoryManager, CategoryManager>();
             builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
             builder.Services.AddScoped<IPropertyManager, PropertyManager>();
+            builder.Services.AddScoped<ILanguageManager, LanguageManager>();
+
             #endregion
 
             #region Authentication Configs-WholeTeam
