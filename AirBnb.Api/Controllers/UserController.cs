@@ -80,13 +80,13 @@ namespace AirBnb.Api.Controllers
 
         // Update User
         [HttpPut]
-        public async Task<ActionResult<UserRegisterDTO>> UpdateAsync([FromForm]UserUpdateDTO model)
+        public async Task<ActionResult<UserRegisterDTO>> UpdateAsync([FromForm]UserUpdateDTO userUpdateDTO)
         {
-            if (model.Id == null)
+            if (userUpdateDTO.Id == null)
             {
                 return BadRequest();
             }
-            var result = await _userManager.UpdateUser(model);
+            var result = await _userManager.UpdateUser(userUpdateDTO);
             if (result == null)
             {
                 return NotFound();

@@ -33,9 +33,9 @@ namespace AirBnb.BL.DTOs.UserDTOs
         [Required]
         [CheckBdDate(ErrorMessage = "Date Should not be in the future")]
         public DateTime BirthDate { get; set; }
-        [Required]
-        [RegularExpression(@"^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$")]
-        public string Password { get; set; } = "";
+        //[Required]
+        //[RegularExpression(@"^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$")]
+        //public string Password { get; set; } = "";
         [CheckImageExtensionValidator(ErrorMessage = "Extension must be .jpg/.png only!")]
         [CheckImageSizeValidator(ErrorMessage = "File size is too large to be attached")]
         public IFormFile? ProfilePicture { get; set; }
