@@ -33,7 +33,7 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
         [RegularExpression(@"^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$")]
         public string Password { get; set; } = "";
 
-        public string? ProfilePicture { get; set; }
+      //  public string? ProfilePicture { get; set; }
         [Required]
      //   [StringLength(14)]
         public double SSN { get; set; }
