@@ -49,6 +49,14 @@ namespace AirBnb.BL.Managers.ManageProperty
             myProp.Hoster = myUser;
             return myProp;
         }
+        //This method is responsible for getting All properties of a specifi user
+        public async Task<IEnumerable<PropertyReadDto>> GetAllPropertiesOfSpecificUser(string userId)
+        {
+            IEnumerable<Property> AllProperties =await _propertyRepository.GetAllPropertiesByIdIncludingPics();
+            IEnumerable<Property> userAllProperties = AllProperties.Where(e => e.HosterId == userId).ToList();
+            return _mapper.Map<IEnumerable<PropertyReadDto>>(userAllProperties);
+
+        }
 
         public async Task<IEnumerable<PropertyReadDto>> GetAllProperties()
         {
@@ -165,6 +173,6 @@ namespace AirBnb.BL.Managers.ManageProperty
             throw new NotImplementedException();
         }
 
-        
+
     }
 }

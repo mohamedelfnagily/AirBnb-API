@@ -28,6 +28,16 @@ namespace AirBnb.Api.Controllers
             }
             return Ok(myProp);
         }
+        [HttpGet("GetUserProperties/{id}")]
+        public async Task<ActionResult<PropertyReadDto>> GetUserProperties(string id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            IEnumerable<PropertyReadDto> myProps = await _propertymanager.GetAllPropertiesOfSpecificUser(id);
+            return Ok(myProps);
+        }
         [HttpGet("GetAllProperties")]
         public async Task<ActionResult<IEnumerable<PropertyReadDto>>> GetAllProperties()
         {
@@ -98,7 +108,7 @@ namespace AirBnb.Api.Controllers
 
         }
         // Delete Property 
-        [HttpDelete("DeleteProperty")]
+        [HttpDelete("DeleteProperty/{id}")]
         public ActionResult<PropertyReadDto> DeleteProperty(Guid id)
         {
             if (id == null)

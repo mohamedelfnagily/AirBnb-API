@@ -15,6 +15,7 @@ namespace AirBnb.BL.Managers.ManageProperty
         //This interface is responsible for all the property methods(operations) that will be exposed to the contoller
         //Getting section:
         Task<PropertyReadDto> GetPropertyById(Guid id);
+        Task<IEnumerable<PropertyReadDto>> GetAllPropertiesOfSpecificUser(string userId);
         Task<IEnumerable<PropertyReadDto>> GetAllProperties();
         //Filteration section:
         Task<IEnumerable<PropertyReadDto>> FilterByNumberOfRooms(int numberOfRooms);
