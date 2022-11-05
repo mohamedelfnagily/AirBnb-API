@@ -180,8 +180,10 @@ namespace AirBnb.BL.Managers.ManageUser
             {
                 return new UserReadDTO { Errors = "User not Found!!" };
             }
-            DateTime banDate = DateTime.UtcNow.AddMonths(model.NumberOfMonths);
-            userToBeBanned.LockoutEnd = banDate;
+            //DateTimeOffset banDate = DateTimeOffset.UtcNow.AddMinutes(model.NumberOfMonths);
+            userToBeBanned.LockoutEnabled = true;
+            userToBeBanned.LockoutEnd = DateTime.UtcNow.AddMonths(model.NumberOfMonths);
+            _userRepository.Save();
             return _mapper.Map<UserReadDTO>(userToBeBanned);
         }
     }
