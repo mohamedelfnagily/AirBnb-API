@@ -182,6 +182,19 @@ namespace AirBnb.BL.Managers.ManageUser
             UserReadDTO updatedUser = _mapper.Map<UserReadDTO>(user);
             return updatedUser;
         }
-
+        //This method is responsible for banning a user
+        public async Task<UserReadDTO> BanUser(UserBanDTO model)
+        {
+            User userToBeBanned = await _usermanager.FindByIdAsync(model.Id);
+            if(userToBeBanned == null)
+            {
+                return new UserReadDTO { Errors = "User not Found!!" };
+            }
+            //DateTimeOffset banDate = DateTimeOffset.UtcNow.AddMinutes(model.NumberOfMonths);
+            userToBeBanned.LockoutEnabled = true;
+            userToBeBanned.LockoutEnd = DateTime.UtcNow.AddMonths(model.NumberOfMonths);
+            _userRepository.Save();
+            return _mapper.Map<UserReadDTO>(userToBeBanned);
+        }
     }
 }

@@ -97,5 +97,21 @@ namespace AirBnb.Api.Controllers
             }
             return Ok(result);
         }
+        //Banning a user
+        [HttpPut("BanUser")]
+        public async Task<ActionResult<UserReadDTO>> BanUser(UserBanDTO model)
+        {
+            if(model == null)
+            {
+                return BadRequest();
+            }
+            var result = await _userManager.BanUser(model);
+            if(result.Errors!=String.Empty)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok(result);
+
+        }
     }
 }

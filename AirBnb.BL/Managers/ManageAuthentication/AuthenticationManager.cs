@@ -79,6 +79,11 @@ namespace AirBnb.BL.Managers.ManageAuthentication
                     myUserData.Message = "Invalid Email or password!";
                     return myUserData;
                 }
+                if(user.LockoutEnabled)
+                {
+                    myUserData.Message = $"Failed, This user is banned!!";
+                    return myUserData;
+                }
             }
             myUserData.Token = GenerateToken(claims, JWTHelper.getCredentials(_config));
             myUserData.ExpiryDuration = JWTHelper.GetExpiryDuration(_config);
