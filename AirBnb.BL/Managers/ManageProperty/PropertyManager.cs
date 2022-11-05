@@ -53,7 +53,19 @@ namespace AirBnb.BL.Managers.ManageProperty
         public async Task<IEnumerable<PropertyReadDto>> GetAllProperties()
         {
             IEnumerable<Property> myProps = await _propertyRepository.GetAllPropertiesByIdIncludingPics();
-            return _mapper.Map<IEnumerable<PropertyReadDto>>(myProps);
+            var myListOfProps = myProps.ToList();
+            IEnumerable<PropertyReadDto> AllPropsIncludingHosters = _mapper.Map<IEnumerable<PropertyReadDto>>(myProps);
+            var myListOfPropReadDto = AllPropsIncludingHosters.ToList();
+            for (int i = 0; i < myProps.Count(); i++)
+            {
+                UserReadDTO myUser = await _usermanager.GetUserById(myListOfProps[i].HosterId);
+                if (myUser != null)
+                {
+                    myListOfPropReadDto[i].Hoster = myUser;
+                }
+            }
+
+            return myListOfPropReadDto;
         }
         //Filtering Section implementation:
         public async Task<IEnumerable<PropertyReadDto>> FilterByEssentials(params string[] Essentials)
