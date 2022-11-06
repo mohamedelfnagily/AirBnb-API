@@ -60,6 +60,7 @@ namespace AirBnb.Api
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireNonAlphanumeric = false;
+                options.Lockout.AllowedForNewUsers = false;
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
             }).AddEntityFrameworkStores<ApplicationDbContext>();
@@ -67,6 +68,8 @@ namespace AirBnb.Api
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireNonAlphanumeric = false;
+                options.Lockout.AllowedForNewUsers = false;
+
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
             }).AddEntityFrameworkStores<ApplicationDbContext>();
