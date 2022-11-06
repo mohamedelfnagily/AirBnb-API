@@ -19,6 +19,8 @@ using AirBnb.BL.Managers.ManageProperty;
 using AirBnb.DAL.Repository.Non_Generic.UserRepo;
 using AirBnb.DAL.Repository.Non_Generic.LanguageRepo;
 using AirBnb.BL.Managers.ManageLanguage;
+using AirBnb.DAL.Repository.Non_Generic.ReservationRepo;
+using AirBnb.BL.Managers.ManageReservation;
 
 namespace AirBnb.Api
 {
@@ -81,6 +83,7 @@ namespace AirBnb.Api
             builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
+            builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
             #endregion
 
             #region AutoMapper Configuration-WholeTeam
@@ -94,7 +97,7 @@ namespace AirBnb.Api
             builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
             builder.Services.AddScoped<IPropertyManager, PropertyManager>();
             builder.Services.AddScoped<ILanguageManager, LanguageManager>();
-
+            builder.Services.AddScoped<IReservationManager, ReservationManager>();
             #endregion
 
             #region Authentication Configs-WholeTeam

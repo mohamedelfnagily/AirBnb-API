@@ -43,12 +43,12 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
             return myReservations;
         }
 
-        public async Task<IEnumerable<Review>> GetAllReviewsAsync(Guid PropertyId)
-        {
-            Property myProperty = await _context.Properties.Include(e => e.Reviews).FirstOrDefaultAsync(p => p.Id == PropertyId);
-            var myReviews = myProperty.Reviews.ToList();
-            return myReviews;
-        }
+        //public async Task<IEnumerable<Review>> GetAllReviewsAsync(Guid PropertyId)
+        //{
+        //    Property myProperty = await _context.Properties.Include(e => e.Reviews).FirstOrDefaultAsync(p => p.Id == PropertyId);
+        //    var myReviews = myProperty.Reviews.ToList();
+        //    return myReviews;
+        //}
         //Filteration section implementation
         public async Task<IEnumerable<Property>> GetPropertiesByEssentials(params string[] Essentials)
         {
