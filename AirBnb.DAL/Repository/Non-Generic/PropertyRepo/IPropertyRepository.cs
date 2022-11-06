@@ -15,7 +15,7 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
 
         Task<IEnumerable<Property>> GetAllPropertiesByIdIncludingPics();
 
-        Task<IEnumerable<Review>> GetAllReviewsAsync(Guid PropertyId);
+        //Task<IEnumerable<Review>> GetAllReviewsAsync(Guid PropertyId);
         Task<IEnumerable<Reservation>> GetAllReservationsAsync(Guid PropertyId);
 
         //Those methods will be used in the filteration of the client

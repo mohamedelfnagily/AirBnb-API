@@ -13,8 +13,8 @@ namespace AirBnb.DAL.Data.Models
         public string? Description { get; set; } = "";
         public DateTime ReviewDate { get; set; }
         public double Rating { get; set; }
-        [ForeignKey("Property")]
-        public Guid PropertyId { get; set; }
-        public Property Property { get; set; } = null!;
+        [ForeignKey("Reservation")]
+        public Guid ReservationId { get; set; }
+        public Reservation Reservation { get; set; } = null!;
     }
 }
