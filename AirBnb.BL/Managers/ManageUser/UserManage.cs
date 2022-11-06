@@ -73,7 +73,7 @@ namespace AirBnb.BL.Managers.ManageUser
         public async Task<IEnumerable<UserReadDTO>> GetAllUsers()
         {
             int i = 0;
-            IEnumerable<User> myUsers = await _usermanager.Users.Include(e=>e.userLanguages).ToListAsync();
+            IEnumerable<User> myUsers = await _usermanager.Users.Include(e=>e.userLanguages).Include(e=>e.Properties).ToListAsync();
             if (myUsers == null)
             {
                 return null;
@@ -82,10 +82,12 @@ namespace AirBnb.BL.Managers.ManageUser
             List<UserReadDTO> users = new List<UserReadDTO>();
             foreach(var user in myUsers)
             {
+                var propertiesCount = user.Properties.Count();
                 var LanguagesIds = user.userLanguages.Select(e => e.LanguageId).ToList();
                 var userLanguages = _languageManager.GetLanguagesNamesByIds(LanguagesIds);
                 users.Add(_mapper.Map<UserReadDTO>(user));
                 users[i].Languagues = userLanguages;
+                users[i].propertiesOwned = propertiesCount;
                 i++;
             }
 
