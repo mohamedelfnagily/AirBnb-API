@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,5 +27,7 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
         public bool SmokeAlarm { get; set; }
         public bool SeaView { get; set; }
         public Guid CategoryId { get; set; }
+        public IEnumerable<IFormFile> Pictures { get; set; } = new HashSet<IFormFile>();
+
     }
 }

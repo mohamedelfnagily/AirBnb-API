@@ -41,7 +41,7 @@ namespace AirBnb.DAL.Repository.Non_Generic.CategoryRepo
            var category =  await GetCategoryByName(name);
             if (category == null)
                 return null;
-           var properties = await  _context.Properties.Where(e => e.CategoryId == category.Id).ToListAsync();
+           var properties = await  _context.Properties.Include(e=>e.Pictures).Where(e => e.CategoryId == category.Id).ToListAsync();
            return properties;
         }
 

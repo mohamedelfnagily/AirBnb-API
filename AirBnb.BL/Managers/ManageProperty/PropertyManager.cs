@@ -1,4 +1,5 @@
 ﻿using AirBnb.BL.DTOs.PropertyDTOs;
+using AirBnb.BL.DTOs.PropertyPicsDTOs;
 using AirBnb.BL.DTOs.ReservationDTOs;
 using AirBnb.BL.DTOs.ReviewDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
