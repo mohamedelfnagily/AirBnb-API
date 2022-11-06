@@ -3,6 +3,8 @@ using AirBnb.BL.DTOs.CategoryProperties;
 using AirBnb.BL.DTOs.EmployeeDTOs;
 using AirBnb.BL.DTOs.PropertyDTOs;
 using AirBnb.BL.DTOs.PropertyPicsDTOs;
+using AirBnb.BL.DTOs.ReservationDTOs;
+using AirBnb.BL.DTOs.ReviewDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
 using AirBnb.DAL.Data.Models;
 using AutoMapper;
@@ -54,7 +56,14 @@ namespace AirBnb.BL.AutoMapper
             CreateMap<Property, PropertyCategories>();
             //Converting from property picture to property picture read dto
             CreateMap<PropertyPicture, PropertyPictureReadDto>();
-
+            //converting from reservation to reservation read dto
+            CreateMap<Reservation, ReservationReadDto>();
+            //converting from reservation add dto to reservation
+            CreateMap<ReservationAddDto, Reservation>();
+            ////converting from user to reservation user dto
+            //CreateMap<User, ReservationUserDto>();
+            //converting from review to review read dto
+            CreateMap<Review, ReviewReadDto>();
 
 
         }

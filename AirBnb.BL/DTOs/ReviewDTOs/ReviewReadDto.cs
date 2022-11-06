@@ -8,5 +8,9 @@ namespace AirBnb.BL.DTOs.ReviewDTOs
 {
     public class ReviewReadDto
     {
+        public Guid Id { get; set; }
+        public string? Description { get; set; } = "";
+        public DateTime ReviewDate { get; set; }
+        public double Rating { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
         //This repository is responsible for all reservation operattions
         //This section is responsible for the hoster managing property reservations
         //Get spicific reservation
-        Task<Reservation> GetReservationById(Guid reservationId);
-        //Get all reservations of the hoster
-        Task<IEnumerable<Reservation>> GetSpecificUserReservations(string hosterId);
+        Task<Reservation> GetReservationById(Guid reservationId);//
+        //Get all reservations of the Hoster
+        Task<IEnumerable<Reservation>> GetSpecificHosterReservations(string hosterId);//
         //get reservations on specific property
         Task<IEnumerable<Reservation>> GetReservationsOnProperty(Guid propertyId);
         //get the current active reservations
@@ -48,7 +48,7 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
         //Getting user specific eservation
         Task<Reservation> GetSpecificReservationToAUser(string userId,Guid reservationId);
         //Create new reservation for a user
-        Task<Reservation> CreateReservationToAUser(string userId,Guid propertyId,DateTime startDate, DateTime endDate);
+        Task<Reservation> CreateReservationToAUser(Reservation resrvation);
 
 
 
