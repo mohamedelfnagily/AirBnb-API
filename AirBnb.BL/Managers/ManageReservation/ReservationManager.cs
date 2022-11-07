@@ -117,8 +117,13 @@ namespace AirBnb.BL.Managers.ManageReservation
             PropertyReadDto prop = await _propertymanager.GetPropertyById(reserv.PropertyId);
             //here we want to check if there is any reservation in this time or not
             var reservations = await _reservationrepository.GetAllAsync();
-            var reservationCheck = reservations.Where(e => e.PropertyId==reserv.PropertyId&&e.StartDate.DayOfYear <=reserv.StartDate.DayOfYear && e.EndDate.DayOfYear >= reserv.EndDate.DayOfYear).ToList();
-            if(reservationCheck.Count > 0)
+            var reservationCheck = reservations.Where(e => e.PropertyId==reserv.PropertyId && 
+            (((DateTime.Compare(reserv.StartDate.Date, e.StartDate.Date) == 1 || DateTime.Compare(reserv.StartDate.Date, e.StartDate.Date) == 0) && (DateTime.Compare(reserv.StartDate.Date, e.EndDate.Date) == -1 || DateTime.Compare(reserv.StartDate.Date, e.EndDate.Date) == 0)) 
+            || ((DateTime.Compare(reserv.EndDate.Date, e.StartDate.Date) == 1 || DateTime.Compare(reserv.EndDate.Date, e.StartDate.Date) == 0) && (DateTime.Compare(reserv.EndDate.Date, e.EndDate.Date) == -1 || DateTime.Compare(reserv.EndDate.Date, e.EndDate.Date) == 0))||((DateTime.Compare(reserv.StartDate.Date, e.StartDate.Date) == -1) && (DateTime.Compare(reserv.EndDate.Date, e.EndDate.Date) == 1)))
+            ).ToList();
+
+
+            if (reservationCheck.Count > 0)
             {
                 return new ReservationReadDto { Errors = "There is another reservation on this property" };
             }

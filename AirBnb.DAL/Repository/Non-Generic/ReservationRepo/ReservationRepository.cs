@@ -27,29 +27,41 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
 
         public async Task<IEnumerable<Reservation>> GetActiveReservations(string hosterId)
         {
-            DateTime todaysDate = DateTime.Today;
+            DateTime todaysDate = DateTime.Today.Date;
             IEnumerable<Reservation> hosterResevations = await GetSpecificHosterReservations(hosterId);
-
-            return hosterResevations.Where(e=>e.StartDate <= todaysDate && e.EndDate >= todaysDate).ToList();
+             
+             hosterResevations.Where(e=>e.StartDate <= todaysDate && e.EndDate >= todaysDate).ToList();
+            return hosterResevations.Where(e => (DateTime.Compare(e.StartDate.Date, todaysDate) == 0 || DateTime.Compare(e.StartDate.Date, todaysDate) == -1) && (DateTime.Compare(e.EndDate.Date, todaysDate) == 0 || DateTime.Compare(e.EndDate.Date, todaysDate) == 1));
         }
 
         public async Task<double> GetAllReservationsBalance(string hosterId, DateTime? startDate, DateTime? endDate)
         {
-            IEnumerable<Reservation> propertyReservations;
-            if (startDate == null || endDate == null)
+            
+            // get all propertiesID that belongs to host with hostid = hosterId
+            var HostProperties = await _context.Properties.Where(e => e.HosterId == hosterId).Select(e=>e.Id).ToListAsync();
+            List<Reservation> propertiesReservation = new List<Reservation>();
+            if (startDate == null && endDate == null) // all time intervall
             {
-                propertyReservations = await _context.Reservations.Include(e => e.Property).Where(e => e.UserId == hosterId).ToListAsync();
+                 propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId)).ToListAsync();
+
             }
-            else
+            else if(startDate == null)  // get all reservation that belongs to this properties where it was reserved ( start date) between  ( property creation & the given end date) 
             {
-                propertyReservations = await _context.Reservations.Where(e => e.UserId == hosterId && e.StartDate >= startDate && e.EndDate <= endDate).ToListAsync();
+                 propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId) && (DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == -1)).ToListAsync();
+                
             }
+            else if(endDate == null)// get all reservation that belongs to this properties where it was reserved ( start date) between ( the given start date & and any time forward)
+            {
+                 propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId) && (DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 1)).ToListAsync();
+                
+            }
+            else    // get all reservation that belongs to this properties where it was reserved ( start date) in any time between the given interval 
+
+            {
+                 propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId) && (DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == -1) && (DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == -1)).ToListAsync();
+            } 
             double balance = 0;
-            if (propertyReservations.Count() == 0)
-            {
-                return 0;
-            }
-            foreach (var reservation in propertyReservations)
+            foreach (var reservation in propertiesReservation)
             {
                 balance += reservation.TotalPrice;
             }
@@ -64,38 +76,43 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
 
         public async Task<IEnumerable<Reservation>> GetFutureReservations(string hosterId)
         {
-            DateTime todaysDate = DateTime.Today;
+            DateTime todaysDate = DateTime.Today.Date;
             IEnumerable<Reservation> hosterResevations = await GetSpecificHosterReservations(hosterId);
 
-            return hosterResevations.Where(e=> e.StartDate > todaysDate).ToList();
+            return hosterResevations.Where(e=> (DateTime.Compare(e.StartDate.Date, todaysDate) == 1)).ToList();
+            
         }
 
         public async Task<IEnumerable<Reservation>> GetHistoryReservations(string hosterId)
         {
-            DateTime todaysDate = DateTime.Today;
+            DateTime todaysDate = DateTime.Today.Date;
             IEnumerable<Reservation> hosterResevations = await GetSpecificHosterReservations(hosterId);
-            return hosterResevations.Where(e=> e.StartDate < todaysDate&&e.EndDate<todaysDate).ToList();
+            return hosterResevations.Where(e=> (DateTime.Compare(e.StartDate.Date, todaysDate) == -1) && (DateTime.Compare(e.EndDate.Date, todaysDate) == -1)).ToList();
+         
         }
 
         public async Task<Reservation> GetPropertyActiveReservation(Guid propertyId)
         {
-            DateTime todaysDate = DateTime.Today;
+            DateTime todaysDate = DateTime.Today.Date;
             var myProperty =await _context.Properties.Include(e=>e.Reservations).FirstOrDefaultAsync(e => e.Id == propertyId);
-            var reservation = myProperty.Reservations.FirstOrDefault(e => e.StartDate.Date <= todaysDate && e.EndDate.Date >= todaysDate);
+            var reservation = myProperty.Reservations.FirstOrDefault(e => (DateTime.Compare(e.StartDate.Date, todaysDate) == -1 || DateTime.Compare(e.StartDate.Date, todaysDate) == 0) && (DateTime.Compare(e.EndDate.Date, todaysDate) == 1 || DateTime.Compare(e.EndDate.Date, todaysDate) == 0));
+            
+
             var property = await _context.Reservations.Include(p => p.Property).Include(e => e.Review).FirstOrDefaultAsync(e=>e.Id==reservation.Id);
             return property;
         }
 
         public async Task<IEnumerable<Reservation>> GetPropertyFutureReservations(Guid propertyId)
         {
-            DateTime todaysDate = DateTime.Today;
-            return await _context.Reservations.Include(e => e.Property).Include(e => e.Review).Where(e => e.StartDate > todaysDate).ToListAsync();
+        
+            DateTime todaysDate = DateTime.Today.Date;
+            return await _context.Reservations.Include(e => e.Property).Include(e => e.Review).Where(e => e.PropertyId == propertyId && DateTime.Compare(e.StartDate.Date, todaysDate) == 1).ToListAsync();
         }
 
         public async Task<IEnumerable<Reservation>> GetPropertyHistoryReservations(Guid propertyId)
-        {
-            DateTime todaysDate = DateTime.Today;
-            return await _context.Reservations.Include(e => e.Property).Include(e => e.Review).Where(e => e.StartDate < todaysDate&& e.EndDate < todaysDate).ToListAsync();
+        { // same logic zy al fo2 bs fr2 al dates
+            DateTime todaysDate = DateTime.Today.Date;
+            return await _context.Reservations.Include(e => e.Property).Include(e => e.Review).Where(e => e.PropertyId == propertyId && (DateTime.Compare(e.StartDate.Date, todaysDate) == -1) && (DateTime.Compare(e.EndDate.Date, todaysDate) == -1)).ToListAsync();
         }
 
         public async Task<Reservation> GetReservationById(Guid id)
@@ -109,21 +126,25 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
         }
 
         public async Task<double> GetSpecificPropertyReservationsBalance(Guid propertyId, DateTime? startDate=null, DateTime? endDate=null)
-        {
+        {  // nfs moshklt al dates lma ntf2 3la logic nb2a nshof hn3dl fl logic dh wla l2
             IEnumerable<Reservation> propertyReservations;
             if (startDate == null||endDate==null)
             {
                 propertyReservations = await GetReservationsOnProperty(propertyId);
             }
+            else if(startDate ==null)
+            {
+                propertyReservations = await _context.Reservations.Where(e => e.PropertyId == propertyId && (DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == -1)).ToListAsync();
+            }
+            else if(endDate == null)
+            {
+                propertyReservations = await _context.Reservations.Where(e => e.PropertyId == propertyId && (DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 1)).ToListAsync();
+            }
             else
             {
-                propertyReservations = await _context.Reservations.Where(e => e.PropertyId == propertyId && e.StartDate >= startDate && e.EndDate <= endDate).ToListAsync();
+                propertyReservations = await _context.Reservations.Where(e => e.PropertyId == propertyId && (DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == -1) && (DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == -1)).ToListAsync();
             }
             double balance = 0;
-            if(propertyReservations.Count()==0)
-            {
-                return 0;
-            }
             foreach (var reservation in propertyReservations)
             {
                 balance += reservation.TotalPrice;
@@ -132,15 +153,19 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
             return balance;
         }
 
-        public async Task<Reservation> GetSpecificReservationToAUser(string userId, Guid reservationId)
+        public async Task<Reservation> GetSpecificReservationToAUser(string userId, Guid reservationId) 
         {
             return await _context.Reservations.Include(e => e.Property).Include(e => e.Review).FirstOrDefaultAsync(d => d.UserId == userId && d.Id == reservationId);
         }
 
         public async Task<IEnumerable<Reservation>> GetSpecificHosterReservations(string hosterId)
         {
+           
+
             var hosterProperties = await _context.Properties.Include(e=>e.Reservations).Where(e => e.HosterId == hosterId).ToListAsync();
+            
             List<Reservation> hosterReservations = new List<Reservation>();
+            
             foreach (var property in hosterProperties)
             {
                 if(property.Reservations.Count>0)
