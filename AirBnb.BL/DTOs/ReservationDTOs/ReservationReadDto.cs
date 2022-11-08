@@ -1,5 +1,4 @@
 ﻿using AirBnb.BL.DTOs.PropertyDTOs;
-using AirBnb.BL.DTOs.ReviewDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
 using AirBnb.BL.Validations;
 using System;
@@ -24,7 +23,7 @@ namespace AirBnb.BL.DTOs.ReservationDTOs
         public double TotalPrice { get; set; }
         public string UserId { get; set; }
         public Guid PropertyId { get; set; }
-        public ReviewReadDto Review { get; set; } = null!;
+        public ReservationReviewReadDto Review { get; set; } = null!;
         public string Errors { get; set; } = "";
     }
 }

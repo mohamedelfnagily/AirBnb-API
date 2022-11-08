@@ -1,7 +1,6 @@
 ﻿using AirBnb.BL.DTOs.PropertyDTOs;
 using AirBnb.BL.DTOs.PropertyPicsDTOs;
 using AirBnb.BL.DTOs.ReservationDTOs;
-using AirBnb.BL.DTOs.ReviewDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
 using AirBnb.BL.Managers.ManageCategories;
 using AirBnb.BL.Managers.ManageUser;
@@ -169,7 +168,7 @@ namespace AirBnb.BL.Managers.ManageProperty
             throw new NotImplementedException();
         }
         //Getting all reviews regarding this property
-        public Task<IEnumerable<ReviewReadDto>> GetAllReviewsAsync(Guid PropertyId)
+        public Task<IEnumerable<ReservationReviewReadDto>> GetAllReviewsAsync(Guid PropertyId)
         {
             throw new NotImplementedException();
         }

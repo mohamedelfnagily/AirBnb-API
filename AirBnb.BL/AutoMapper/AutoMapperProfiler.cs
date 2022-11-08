@@ -63,7 +63,16 @@ namespace AirBnb.BL.AutoMapper
             ////converting from user to reservation user dto
             //CreateMap<User, ReservationUserDto>();
             //converting from review to review read dto
-            CreateMap<Review, ReviewReadDto>();
+            CreateMap<Review, ReservationReviewReadDto>();
+
+
+
+
+            // reviews mapping
+
+            CreateMap<ReviewAddDTO, Review>();
+            CreateMap<ReviewUpdateDTO, Review>();
+            CreateMap<Review, ReviewReadDTO>();
 
 
         }

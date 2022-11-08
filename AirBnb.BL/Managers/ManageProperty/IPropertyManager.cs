@@ -1,6 +1,5 @@
 ﻿using AirBnb.BL.DTOs.PropertyDTOs;
 using AirBnb.BL.DTOs.ReservationDTOs;
-using AirBnb.BL.DTOs.ReviewDTOs;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace AirBnb.BL.Managers.ManageProperty
         Task<IEnumerable<PropertyReadDto>> FilterByLanguages(params string[] languages);
         
         //Getting dependencies:
-        Task<IEnumerable<ReviewReadDto>> GetAllReviewsAsync(Guid PropertyId);
+        Task<IEnumerable<ReservationReviewReadDto>> GetAllReviewsAsync(Guid PropertyId);
         Task<IEnumerable<ReservationReadDto>> GetAllReservationsAsync(Guid PropertyId);
         //Adding Section:
         Task<PropertyReadDto> AddProperty(PropertyAddDto model);
