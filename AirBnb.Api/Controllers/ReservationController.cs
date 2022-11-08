@@ -25,6 +25,17 @@ namespace AirBnb.Api.Controllers
             }
             return Ok(reservation);
         }
+        //Getting userReservation by its id
+        [HttpGet("GetUserReservations/{id}")]
+        public async Task<ActionResult<IEnumerable<ReservationReadDto>>> GetUserReservations(string id)
+        {
+            if(id==null)
+            {
+                return BadRequest();
+            }
+            IEnumerable<ReservationReadDto> reservation = await _reservationmanager.GetSpecificUserReservations(id);
+            return Ok(reservation);
+        }
         //Getting all reservations of hoster
         [HttpGet("GetHosterReservations/{id}")]
         public async Task<ActionResult<IEnumerable<ReservationReadDto>>> GetHosterReservations(string id)

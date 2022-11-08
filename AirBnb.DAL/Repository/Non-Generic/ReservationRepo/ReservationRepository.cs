@@ -18,6 +18,10 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
         {
             _context = context;
         }
+        public async Task<IEnumerable<Reservation>> GetUserReservations(string userId)
+        {
+            return await _context.Reservations.Where(e => e.UserId == userId).ToListAsync();
+        }
 
         public async Task<Reservation> CreateReservationToAUser(Reservation reservation)
         {
@@ -178,5 +182,7 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
             }
             return hosterReservations;
         }
+
+
     }
 }

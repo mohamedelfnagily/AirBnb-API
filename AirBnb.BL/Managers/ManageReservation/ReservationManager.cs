@@ -34,7 +34,12 @@ namespace AirBnb.BL.Managers.ManageReservation
             }
             return _mapper.Map<ReservationReadDto>(reserv);
         }
-
+        //Getting specific user reservations
+        public async Task<IEnumerable<ReservationReadDto>> GetSpecificUserReservations(string userId)
+        {
+            IEnumerable<Reservation> userReservations = await _reservationrepository.GetUserReservations(userId);
+            return _mapper.Map<IEnumerable<ReservationReadDto>>(userReservations);
+        }
         //getting all reservations for a specific hoster
         public async Task<IEnumerable<ReservationReadDto>> GetSpecificHosterReservations(string hosterId)
         {
@@ -140,5 +145,7 @@ namespace AirBnb.BL.Managers.ManageReservation
             return reservationCreated;
             
         }
+
+
     }
 }

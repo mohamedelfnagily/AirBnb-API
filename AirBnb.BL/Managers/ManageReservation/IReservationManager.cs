@@ -12,6 +12,7 @@ namespace AirBnb.BL.Managers.ManageReservation
     {
         Task<ReservationReadDto> GetReservationById(Guid reservationId);
         Task<IEnumerable<ReservationReadDto>> GetSpecificHosterReservations(string hosterId);
+        Task<IEnumerable<ReservationReadDto>> GetSpecificUserReservations(string userId);
         Task<IEnumerable<ReservationReadDto>> GetReservationsOnProperty(Guid propertyId);
         Task<IEnumerable<ReservationReadDto>> GetActiveReservations(string hosterId);
         Task<ReservationReadDto> GetPropertyActiveReservation(Guid propertyId);
