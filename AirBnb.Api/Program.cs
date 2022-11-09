@@ -23,6 +23,8 @@ using AirBnb.DAL.Repository.Non_Generic.ReservationRepo;
 using AirBnb.BL.Managers.ManageReservation;
 using AirBnb.DAL.Repository.Non_Generic.ReviewRepo;
 using AirBnb.BL.Managers.ManageRevews;
+using System.Security.Claims;
+using Microsoft.Extensions.Options;
 
 namespace AirBnb.Api
 {
@@ -123,6 +125,25 @@ namespace AirBnb.Api
                     ValidateAudience = false
                 };
             });
+            #endregion
+
+            #region Authorization (Policies)
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("SuperManager",
+                    p => p.RequireClaim(ClaimTypes.Role, "CEO", "SuperAdmin"));
+
+                options.AddPolicy("Manager",
+                    p => p.RequireClaim(ClaimTypes.Role, "CEO", "SuperAdmin", "Admin"));
+
+                options.AddPolicy("CEO",
+                    p => p.RequireClaim(ClaimTypes.Role, "CEO"));
+
+                options.AddPolicy("User",
+                    p => p.RequireClaim(ClaimTypes.Role, "User"));
+
+            });
+
             #endregion
 
             builder.Services.AddControllers();
