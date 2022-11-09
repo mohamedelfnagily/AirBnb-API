@@ -141,6 +141,14 @@ namespace AirBnb.BL.Managers.ManageEmployee
         public async Task<EmployeeReadDTO> UpdateEmployee(EmployeeUpdateDTO model)
         {
             var errors = string.Empty;
+            //This variable is a bridge to use data stream out of the condition
+            MemoryStream myMemoryStream = new MemoryStream();
+            if (model.ProfilePicture != null)
+            {
+                using var dataStream = new MemoryStream();
+                await model.ProfilePicture.CopyToAsync(dataStream);
+                myMemoryStream = dataStream;
+            }
             Employee emp = await _employeemanager.FindByIdAsync(model.Id);
             var claims = await _employeemanager.GetClaimsAsync(emp);
             if (emp == null)
@@ -148,6 +156,10 @@ namespace AirBnb.BL.Managers.ManageEmployee
                 return null;
             }
             _mapper.Map(model, emp);
+            if (model.ProfilePicture != null)
+            {
+                emp.ProfilePicture = myMemoryStream.ToArray();
+            }
             var result = await _employeemanager.UpdateAsync(emp);
             if (!result.Succeeded)
             {

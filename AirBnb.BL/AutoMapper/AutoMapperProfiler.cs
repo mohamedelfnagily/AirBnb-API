@@ -36,7 +36,7 @@ namespace AirBnb.BL.AutoMapper
             CreateMap<Employee, EmployeeReadDTO>();
 
             //Converting from update employee dto to employee
-            CreateMap<EmployeeUpdateDTO, Employee>();
+            CreateMap<EmployeeUpdateDTO, Employee>().ForMember(src => src.ProfilePicture, opt => opt.Ignore());
 
             //Converting from update category dto to category
             CreateMap<CategoryUpdateDTO, Category>();

@@ -5,6 +5,7 @@ using AirBnb.BL.Managers.ManageEmployee;
 using AirBnb.BL.Managers.ManageUser;
 using AirBnb.DAL.Data.Models;
 using AutoMapper;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -91,6 +92,34 @@ namespace AirBnb.BL.Managers.ManageAuthentication
             return myUserData;
 
         }
+        //This method is responsible for siging in with google
+        public async Task<TokenDto> LoginWithGoogle(UserLoginWithGoogleDto model)
+        {
+            TokenDto? myUserData = new TokenDto();
+            IList<Claim> claims;
 
+            var settings = new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new List<string> { _config.GetValue<string>("GoogleApiKey") }
+            };
+            var payLoad = await GoogleJsonWebSignature.ValidateAsync(model.Credentials, settings);
+            var user = await _userManager.FindByEmailAsync(payLoad.Email);
+            if (user == null)
+            {
+                myUserData.Message = "Invalid Email or Password!";
+                return myUserData;
+            }
+            claims = await _userManager.GetClaimsAsync(user);
+            if (user.LockoutEnabled)
+            {
+                myUserData.Message = $"Failed, This user is banned!!";
+                return myUserData;
+            }
+
+            myUserData.Token = GenerateToken(claims, JWTHelper.getCredentials(_config));
+            myUserData.ExpiryDuration = JWTHelper.GetExpiryDuration(_config);
+            myUserData.Message = "Success";
+            return myUserData;
+        }
     }
 }

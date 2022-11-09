@@ -1,4 +1,5 @@
 ﻿using AirBnb.BL.Validations;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -31,9 +32,9 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
         [Required]
         [CheckBdDate(ErrorMessage = "Date Should not be in the future")]
         public DateTime BirthDate { get; set; }
-        
 
-        public string? ProfilePicture { get; set; }
+
+        public IFormFile? ProfilePicture { get; set; } = null!;
         [Required]
         public double SSN { get; set; }
         [Required]

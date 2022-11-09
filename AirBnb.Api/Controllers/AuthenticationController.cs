@@ -36,6 +36,20 @@ namespace AirBnb.Api.Controllers
             }
             return Ok(token);
         }
-        
+        [HttpPost("LoginWithGoogle")]
+        public async Task<ActionResult<TokenDto>> LoginUserWighGoogle(UserLoginWithGoogleDto model)
+        {
+            if (model == null)
+            {
+                return BadRequest();
+            }
+            TokenDto token = await _authenticationmanager.LoginWithGoogle(model);
+            if (token.Message != "Success")
+            {
+                return BadRequest(token.Message);
+            }
+            return Ok(token);
+        }
+
     }
 }

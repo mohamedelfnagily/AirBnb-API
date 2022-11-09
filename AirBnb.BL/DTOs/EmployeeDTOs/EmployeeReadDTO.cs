@@ -17,7 +17,7 @@ namespace AirBnb.BL.DTOs.EmployeeDTOs
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";
         public DateTime BirthDate { get; set; }
-        public string? ProfilePicture { get; set; }
+        public byte[]? ProfilePicture { get; set; } = null!;
         public double SSN { get; set; }
         public double Salary { get; set; }
 

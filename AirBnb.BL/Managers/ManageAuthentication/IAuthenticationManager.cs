@@ -13,6 +13,7 @@ namespace AirBnb.BL.Managers.ManageAuthentication
     public interface IAuthenticationManager
     {
         Task<TokenDto> LoginUser(UserLoginDTO model);
+        Task<TokenDto> LoginWithGoogle(UserLoginWithGoogleDto model);
         string GenerateToken(IEnumerable<Claim> myClaims, SigningCredentials credentials);
     }
 }
