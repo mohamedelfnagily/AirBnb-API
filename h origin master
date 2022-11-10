@@ -1,0 +1,391 @@
+[33mcommit ec66722ba0166de5d7678b8991da44fbdac0e0a8[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Tue Nov 8 13:43:30 2022 +0200
+
+    Implemented Reviews
+
+[33mcommit 2c6b5f1303c24f8b1aaed47856b1558553f49e2f[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Mon Nov 7 14:58:42 2022 +0200
+
+    Updating Reservation Repository
+
+[33mcommit cf2fc1d7940c6d11041ea52a22eb99ee9420b7cf[m
+Merge: 37bd00b c727260
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Mon Nov 7 00:45:50 2022 +0200
+
+    Merge branch 'master' of https://github.com/mohamedelfnagily/AirBnb-API
+
+[33mcommit 37bd00b19b1deefb6d89a3a16d7186a182da7c2f[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Mon Nov 7 00:45:46 2022 +0200
+
+    Fixing Ban error
+
+[33mcommit c727260b5aa0402ad19398624415f335ddb084af[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Nov 6 23:57:59 2022 +0200
+
+    Implementing reservations managers/dtos and end points
+
+[33mcommit eccfe759698f6d660c0dd858b0e88e974f7bfd64[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Nov 6 18:51:27 2022 +0200
+
+    Creating reservation models and repository with basic functionalities
+
+[33mcommit 6843524c8345cb479fe43f25e1d3a6ca5d32a028[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Nov 6 14:17:53 2022 +0200
+
+    Updating property dto
+
+[33mcommit 59d6533df44959d46d3dcf3c69fc30d05ef9a147[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Sun Nov 6 11:48:56 2022 +0200
+
+    Added Properties Owned Counts to UserReadDTO
+
+[33mcommit afbba4dc82da2eef8d0bb9b17f954dd0ae79a513[m
+Merge: 73ba8f9 80edf5e
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Sat Nov 5 22:04:02 2022 +0200
+
+    Merge branch 'master' of https://github.com/mohamedelfnagily/AirBnb-API
+
+[33mcommit 73ba8f92e1218b9f4abedb854bc3bc824a30d755[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Sat Nov 5 22:03:47 2022 +0200
+
+    Updated GetAllUsers
+
+[33mcommit 80edf5ec61feec33803f45345139865028043340[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sat Nov 5 21:02:59 2022 +0200
+
+    Update user ban
+
+[33mcommit 05d120ea244316cecb98400cf895d224833d47fb[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sat Nov 5 20:06:59 2022 +0200
+
+    Adding ban user End points
+
+[33mcommit 349bd1b026171937fa87a7e8021c45c3dc94f75e[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sat Nov 5 18:53:55 2022 +0200
+
+    Adding new end point to property controller in order to get all properties of the selected user
+
+[33mcommit 3e05807a31c31cffb4210145a94d583f14818f72[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sat Nov 5 16:38:59 2022 +0200
+
+    Updating getAllProperties end point
+
+[33mcommit c476c63f3882634952835019d5f2126226867ade[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Sat Nov 5 14:41:26 2022 +0200
+
+    Removing profile picture
+
+[33mcommit 1b90b5a8cf18aff25e1e125ca7c97900baf6c63b[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Fri Nov 4 23:56:42 2022 +0200
+
+    REmoving password from userUpdate dto
+
+[33mcommit d9042553d81528d3e7c8771a36afec0f37af7173[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Thu Nov 3 21:38:05 2022 +0200
+
+    Seeding Property
+
+[33mcommit fee4a096463c08337763c0b9d6f79a7796afdba6[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Thu Nov 3 21:21:02 2022 +0200
+
+    Updating property managers  to add   picture
+
+[33mcommit 62dc8ad9759e6ce7b0d34f8f853c06429e6ac142[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Thu Nov 3 20:17:10 2022 +0200
+
+    Seeded User
+
+[33mcommit 55c24dc57d5e5a4713c333b8def79d9af489b89b[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Thu Nov 3 17:37:19 2022 +0200
+
+    Updating database with new pictures data type and adding profile picture with regestiration
+
+[33mcommit 7c440d7fab195be8943f4d71d28a4097cfc1ccf0[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Thu Nov 3 13:07:35 2022 +0200
+
+    Added id to propertyReadDTO
+
+[33mcommit f4f018e6f433086129bc399c4625509a828f7d9a[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Thu Nov 3 12:52:58 2022 +0200
+
+    Adding languages to userReadDto
+
+[33mcommit 1306c9c3a50b16fbfd596546f63ba6d6d4d7c71b[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 22:46:56 2022 +0200
+
+    Updated category image url in database
+
+[33mcommit 0fe2ed28ef6fcdd1929a17ccba805e4a015b630d[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Wed Nov 2 21:16:07 2022 +0200
+
+    Update Category End Points
+
+[33mcommit 1c07e01ba8025ef1027547cc8564062cbc1e2030[m
+Merge: 4e0f157 2a347f0
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Wed Nov 2 21:11:52 2022 +0200
+
+    Merge branch 'master' of https://github.com/mohamedelfnagily/AirBnb-API
+
+[33mcommit 4e0f1574689c62dac96348a54af1e75e3db61486[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Wed Nov 2 21:11:41 2022 +0200
+
+    Implementing GetPropertiesByCategory Name EndPoint
+
+[33mcommit 2a347f0480f1f9c4febace22d98599b0fa3e1905[m
+Author: nadaelnagar1 <nadaelnagar483@gmail.com>
+Date:   Wed Nov 2 20:00:35 2022 +0200
+
+    seedingCategory
+
+[33mcommit d4e86d65842f654e0d6c1f36db08f978cda700b7[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Wed Nov 2 19:58:11 2022 +0200
+
+    Added Filtration EndPoints For Properties
+
+[33mcommit f77e338f8fe5740b205a10ae37356d6a64141fe4[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Wed Nov 2 19:34:38 2022 +0200
+
+    Added Some Propeties EndPoints
+
+[33mcommit 8d46f3ddb6b673f3c553b5c1b66dee1c1815cd19[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 18:11:27 2022 +0200
+
+    Implementing Property controller
+
+[33mcommit 0709005d4ad926a5d5c290d5fa141b87b904debf[m
+Author: nadaelnagar1 <nadaelnagar483@gmail.com>
+Date:   Wed Nov 2 17:47:58 2022 +0200
+
+    property to propcategory mapped
+
+[33mcommit 7095d5fb52e1e3e4cd60281ca33c3a82954aafb4[m
+Merge: 15e91be 592e75a
+Author: nadaelnagar1 <nadaelnagar483@gmail.com>
+Date:   Wed Nov 2 17:45:15 2022 +0200
+
+    resolving conflicts
+
+[33mcommit 15e91be7288cd8f37143e05a2ffa23ab3ddc96ff[m
+Author: nadaelnagar1 <nadaelnagar483@gmail.com>
+Date:   Wed Nov 2 17:42:25 2022 +0200
+
+    added propertycategory
+
+[33mcommit 592e75aeb7aa8f47fd89a2bb78231065acfc04ae[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 17:38:57 2022 +0200
+
+    Implementing property managers and controller
+
+[33mcommit 1d85fd6bcb64680dcc3e21d726f3fd95a8646730[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 14:43:54 2022 +0200
+
+    Resolving program.cs conflicts
+
+[33mcommit e1c3ce3ba7ae6d25a47de85963bb6c15048be410[m
+Merge: ddc723c dea96b8
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 14:03:12 2022 +0200
+
+    Merge branch 'master' of https://github.com/mohamedelfnagily/AirBnb-GraduationProject
+
+[33mcommit ddc723ce99c94914787e185c6f70ae9b7ce3d9be[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 14:02:56 2022 +0200
+
+    Login/Regestiration with tokens generated and examined
+
+[33mcommit dea96b878897fa55523cea8588fb2faa923cb939[m
+Author: nadaelnagar1 <nadaelnagar483@gmail.com>
+Date:   Wed Nov 2 12:03:14 2022 +0200
+
+    update Category controller
+
+[33mcommit e0826094c42f857dd9cb9cf1b1c2d8d5beee841e[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 01:36:13 2022 +0200
+
+    Resolving Conflicts
+
+[33mcommit 92c24e38d0332055ea241cca21982f19384b41a8[m
+Merge: bf12232 f5f83f6
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 01:36:00 2022 +0200
+
+    Adding jwt configurations and property manager
+
+[33mcommit bf122323ecb27f9cc8ea49d8a145c5bec6f60716[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Wed Nov 2 01:09:28 2022 +0200
+
+    Adding JWT configurations/Token creation/Property manager
+
+[33mcommit f5f83f653091900f553181129065635de01f0cb7[m
+Merge: a1eb436 0c9dd9c
+Author: nadaelnagar1 <nadaelnagar483@gmail.com>
+Date:   Wed Nov 2 00:40:36 2022 +0200
+
+    Merge branch 'master' of https://github.com/mohamedelfnagily/AirBnb-API
+
+[33mcommit a1eb436b63001be97cf2e4062ccd1f5d19ae8d1e[m
+Author: nadaelnagar1 <nadaelnagar483@gmail.com>
+Date:   Wed Nov 2 00:39:46 2022 +0200
+
+    Category manager and controller added
+
+[33mcommit 0c9dd9c7a44ac5a58d140c6b72664d13fa786bc4[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Tue Nov 1 21:09:02 2022 +0200
+
+    Added User Crud Operations
+
+[33mcommit 08e493323aa57312698efd02416b1e60d3d3ff11[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Tue Nov 1 20:23:04 2022 +0200
+
+    Added All Employees Crud End Points
+
+[33mcommit cd5ecc50d80888440a99a3b01ae15cde0dc359e4[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Tue Nov 1 20:07:45 2022 +0200
+
+    Added Update Employee EndPoint
+
+[33mcommit ac00b0efc3bb3638cabaf67eae6fe463dd390bc8[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Tue Nov 1 19:31:45 2022 +0200
+
+    Added Delete Employee End Point
+
+[33mcommit e362cb1beaa9a49f63bc25b6d3d0c8ba575b3ee4[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Tue Nov 1 18:43:51 2022 +0200
+
+    Implemented Employee Register Endpoint
+
+[33mcommit 043314da1824bf0373b67e370706aae27fc63a52[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Tue Nov 1 15:12:14 2022 +0200
+
+    Adding all the models
+
+[33mcommit 18b85e1f0b6b398e0c7453584be820abb083a0d2[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Tue Nov 1 11:19:10 2022 +0200
+
+    Implementing Email Settings/Services/Templates
+
+[33mcommit c7aafbbb3740a6134b388dff40833efd721dd4f4[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Tue Nov 1 10:25:36 2022 +0200
+
+    Employee manager updated
+
+[33mcommit 608fc78216bcc0f7c139a6ad2652e6f799546cfb[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Mon Oct 31 22:22:20 2022 +0200
+
+    Adding user Manager class and interface
+
+[33mcommit 7ae74d2913954c1569e481f2d2cf602a2d7ebaac[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Mon Oct 31 21:13:24 2022 +0200
+
+    Added Validation for User and Employee DTOs
+
+[33mcommit 5369039dc76965afc72cef5ef20d85c725489e11[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Mon Oct 31 16:02:45 2022 +0200
+
+    Added Employee & User DTOS
+
+[33mcommit e5f06284966db902c365e39956d40cb8a42b8d29[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Oct 30 23:37:49 2022 +0200
+
+    Implementing person-Special repository class and interface
+
+[33mcommit 68d1ad01d930a0b8491c006e01f4443b219c2cd7[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Oct 30 23:31:33 2022 +0200
+
+    Implementing the base Repository class and interface
+
+[33mcommit 8e788d351c9c1723ff6cc682dd3c1bb93b42e8ce[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Oct 30 23:10:53 2022 +0200
+
+    Adding Context class/main users models and creating the database
+
+[33mcommit e99d97fa6aa38e26b43a36a7140934fbc02831c8[m[33m ([m[1;31morigin/Authentication[m[33m, [m[1;32mAuthentication[m[33m)[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Oct 30 21:08:27 2022 +0200
+
+    Checking My Connection
+
+[33mcommit e5221c9a420ff7c697f5609942e40493668837cf[m
+Merge: bbd9f5f d18c9ff
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Oct 30 21:07:58 2022 +0200
+
+    Merge branch 'master' of https://github.com/mohamedelfnagily/AirBnb-GraduationProject
+
+[33mcommit bbd9f5f5961eed20b46792eef985fad3136c7a82[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Oct 30 21:06:47 2022 +0200
+
+    Adding Authentication Controller
+
+[33mcommit d18c9ff742fdc43474be9bddc4919ef599109a50[m
+Author: nadaelnagar1 <nadaelnagar483@gmail.com>
+Date:   Sun Oct 30 20:58:41 2022 +0200
+
+    newline
+
+[33mcommit 524f5d1c4a452785ed8a692ae98c375fb2060ced[m
+Author: ramzybassem100@gmail.com <ramzybassem100@gmail.com>
+Date:   Sun Oct 30 20:55:01 2022 +0200
+
+    Checking My Connection
+
+[33mcommit e204e5d9982f07581b2978a5aee5637cb383885b[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Oct 30 13:02:46 2022 +0200
+
+    Add project files.
+
+[33mcommit edfc81d34f92acb995ab4f1fe3908dc15865ff7f[m
+Author: mohamedelfnagily <m.elfnagily96@gmail.com>
+Date:   Sun Oct 30 13:02:44 2022 +0200
+
+    Add .gitattributes and .gitignore.
