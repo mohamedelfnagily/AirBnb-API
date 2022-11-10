@@ -1,6 +1,7 @@
 ﻿using AirBnb.BL.DTOs.EmployeeDTOs;
 using AirBnb.BL.DTOs.UserDTOs;
 using AirBnb.BL.Emails.Services;
+using AirBnb.BL.Helpers;
 using AirBnb.BL.Managers.ManageLanguage;
 using AirBnb.DAL.Data.Models;
 using AirBnb.DAL.Repository.Non_Generic.UserRepo;
@@ -125,6 +126,10 @@ namespace AirBnb.BL.Managers.ManageUser
             {
                 new Claim(ClaimTypes.NameIdentifier,myUser.Id),
             };
+            string url = ClientSideURLHelper.URL + myUser.Id;
+            var QRCoder = new QRCodeHelper();
+            var QRImage = QRCoder.GenerateQRCode(url);
+            myUser.UserQRCode = QRImage;
             await _usermanager.AddClaimsAsync(myUser, claims);
             UserReadDTO AddedUSer = _mapper.Map<UserReadDTO>(myUser);
             // Setting Html Welcome Email Body

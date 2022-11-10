@@ -20,6 +20,7 @@ namespace AirBnb.DAL.Data.Models
         }
         public double Rating { get; set; }
         public double Balance { get; set; }
+        public byte[]? UserQRCode { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<Property> Properties { get; set; }
         public ICollection<UserLanguage> userLanguages { get; set; }
