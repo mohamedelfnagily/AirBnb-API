@@ -33,6 +33,8 @@ namespace AirBnb.BL.Managers.ManageProperty
         //Updating Section:
         PropertyReadDto UpdateProperty(PropertyUpdateDto model);
 
+        Task<PropertyReadDto> IncrementViews(Guid propertyId);
+
 
 
     }

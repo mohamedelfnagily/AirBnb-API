@@ -100,6 +100,14 @@ namespace AirBnb.DAL.Repository.Non_Generic.PropertyRepo
             return myProps;
         }
 
+        public async Task<Property> IncrementPropertyViews(Guid PropertyId)
+        {
+            var myProp=  await _context.Properties.Include(p => p.Pictures).FirstOrDefaultAsync(e => e.Id == PropertyId);
+            if (myProp == null)
+                return null;
+            myProp.Views++;
+            return myProp;
 
+        }
     }
 }

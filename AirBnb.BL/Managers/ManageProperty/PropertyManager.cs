@@ -172,6 +172,16 @@ namespace AirBnb.BL.Managers.ManageProperty
         {
             throw new NotImplementedException();
         }
+        public async Task<PropertyReadDto> IncrementViews(Guid propertyId)
+        {
+           var property = await _propertyRepository.IncrementPropertyViews(propertyId);
+            if(property== null)
+            {
+                return null;
+            }
+           await _propertyRepository.SaveAsync();
+            return _mapper.Map<PropertyReadDto>(property);
+        }
 
 
     }

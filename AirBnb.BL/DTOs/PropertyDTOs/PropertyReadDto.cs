@@ -16,6 +16,8 @@ namespace AirBnb.BL.DTOs.PropertyDTOs
         public double Price { get; set; }
         public double Rating { get; set; }
         public string PropertyType { get; set; } = "";
+        public int Views { get; set; }
+
         public int MaxNumberOfUsers { get; set; }
         public int NumberOfRooms { get; set; }
         public bool Wifi { get; set; }
