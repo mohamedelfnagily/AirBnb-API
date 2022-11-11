@@ -91,7 +91,7 @@ namespace AirBnb.Api.Controllers
             return Ok(myProp);
         }
         // Increment property's Views
-        [HttpPut("IncrementViews/{PropertyId}")]
+        [HttpGet("IncrementViews/{PropertyId}")]
         public async Task<ActionResult<PropertyReadDto>> UpdateProperty(Guid PropertyId)
         {
             if (PropertyId == Guid.Empty)
