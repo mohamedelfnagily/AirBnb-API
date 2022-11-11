@@ -1,6 +1,7 @@
 ﻿using AirBnb.BL.DTOs.UserDTOs;
 using AirBnb.BL.Helpers;
 using AirBnb.BL.Managers.ManageUser;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace AirBnb.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserManager _userManager;

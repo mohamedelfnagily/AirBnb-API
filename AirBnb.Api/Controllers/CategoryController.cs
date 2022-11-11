@@ -1,6 +1,7 @@
 ﻿using AirBnb.BL.DTOs.CategoryDTOs;
 using AirBnb.BL.DTOs.EmployeeDTOs;
 using AirBnb.BL.Managers.ManageCategories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace AirBnb.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryManager _categoryManager;
@@ -67,6 +69,7 @@ namespace AirBnb.Api.Controllers
 
         }
         // add category 
+        [Authorize(Policy ="Manager")]
         [HttpPost("addCategory")]
         public async Task<ActionResult<CategoryReadDTO>> addCategory(CategoryAddDTO model)
         {
@@ -85,7 +88,7 @@ namespace AirBnb.Api.Controllers
 
         }
 
-
+        [Authorize(Policy = "Manager")]
         [HttpDelete("DeleteCategory{id}")]
         // Delete Category
         public async Task<ActionResult<EmployeeReadDTO>> DeleteCategoryasync(Guid id)
@@ -106,6 +109,7 @@ namespace AirBnb.Api.Controllers
         }
 
         // Update Category
+        [Authorize(Policy = "Manager")]
         [HttpPut("UpdateCategory")]
         public async Task<ActionResult<CategoryReadDTO>> UpdateCategoryAsync(CategoryUpdateDTO model)
         {

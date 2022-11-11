@@ -1,5 +1,6 @@
 ﻿using AirBnb.BL.DTOs.PropertyDTOs;
 using AirBnb.BL.Managers.ManageProperty;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace AirBnb.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PropertyController : ControllerBase
     {
         private readonly IPropertyManager _propertymanager;

@@ -1,5 +1,6 @@
 ﻿using AirBnb.BL.DTOs.ReviewDTOs;
 using AirBnb.BL.Managers.ManageRevews;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace AirBnb.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReviewController : ControllerBase
     {
         private readonly IReviewManager _reviewManager;

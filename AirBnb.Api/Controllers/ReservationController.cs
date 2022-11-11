@@ -1,5 +1,6 @@
 ﻿using AirBnb.BL.DTOs.ReservationDTOs;
 using AirBnb.BL.Managers.ManageReservation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace AirBnb.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReservationController : ControllerBase
     {
         private readonly IReservationManager _reservationmanager;

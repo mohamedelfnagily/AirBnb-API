@@ -1,5 +1,6 @@
 ﻿using AirBnb.BL.DTOs.EmployeeDTOs;
 using AirBnb.BL.Managers.ManageEmployee;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace AirBnb.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeManager _employeeManager;
@@ -16,6 +18,7 @@ namespace AirBnb.Api.Controllers
 
         }
         //Get all Employees
+        [Authorize(Policy = "CEO")]
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<EmployeeReadDTO>>> GetAll()
         {
@@ -28,6 +31,7 @@ namespace AirBnb.Api.Controllers
 
         }
         // Get Employee By id
+        [Authorize(Policy = "CEO")]
         [HttpGet("GetById/{id}")]
         public async Task<ActionResult<EmployeeReadDTO>> GetById(string id)
         {
@@ -42,6 +46,7 @@ namespace AirBnb.Api.Controllers
 
 
         // Create Employee 
+        [Authorize(Policy = "CEO")]
         [HttpPost("CreateEmployee")]
         public async Task<ActionResult<EmployeeReadDTO>> CreateAsync(EmployeeRegisterDTO model)
         {
@@ -59,7 +64,7 @@ namespace AirBnb.Api.Controllers
 
         }
 
-
+        [Authorize(Policy = "CEO")]
         [HttpDelete("DeleteEmployee/{id}")]
         // Delete Employee
         public async Task<ActionResult<EmployeeReadDTO>> DeleteAsync(string id)
@@ -79,6 +84,7 @@ namespace AirBnb.Api.Controllers
         }
 
         // Update Employee
+        [Authorize(Policy = "Manager")]
         [HttpPut]
         public async Task<ActionResult<EmployeeReadDTO>> UpdateAsync([FromForm]EmployeeUpdateDTO model)
         {
