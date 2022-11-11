@@ -100,9 +100,11 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
             DateTime todaysDate = DateTime.Today.Date;
             var myProperty =await _context.Properties.Include(e=>e.Reservations).FirstOrDefaultAsync(e => e.Id == propertyId);
             var reservation = myProperty.Reservations.FirstOrDefault(e => (DateTime.Compare(e.StartDate.Date, todaysDate) == -1 || DateTime.Compare(e.StartDate.Date, todaysDate) == 0) && (DateTime.Compare(e.EndDate.Date, todaysDate) == 1 || DateTime.Compare(e.EndDate.Date, todaysDate) == 0));
-            
-
-            var property = await _context.Reservations.Include(p => p.Property).Include(e => e.Review).FirstOrDefaultAsync(e=>e.Id==reservation.Id);
+            if(reservation==null)
+            {
+                return null;
+            }
+            var property = await _context.Reservations.Include(p => p.Property).Include(e => e.Review).FirstOrDefaultAsync(e => e.Id == reservation.Id);
             return property;
         }
 
