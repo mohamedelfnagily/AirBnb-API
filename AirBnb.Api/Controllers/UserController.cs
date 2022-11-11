@@ -44,7 +44,8 @@ namespace AirBnb.Api.Controllers
         }
 
 
-        // Create User 
+        // Create User
+        [AllowAnonymous]
         [HttpPost("CreateUser")]
         public async Task<ActionResult<UserRegisterDTO>> CreateAsync([FromForm]UserRegisterDTO model)
         {

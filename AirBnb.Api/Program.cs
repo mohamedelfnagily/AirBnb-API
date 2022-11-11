@@ -131,13 +131,13 @@ namespace AirBnb.Api
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("SuperManager",
-                    p => p.RequireClaim(ClaimTypes.Role, "CEO", "SuperAdmin"));
+                    p => p.RequireClaim(ClaimTypes.Role, "Ceo", "SuperAdmin"));
 
                 options.AddPolicy("Manager",
-                    p => p.RequireClaim(ClaimTypes.Role, "CEO", "SuperAdmin", "Admin"));
+                    p => p.RequireClaim(ClaimTypes.Role, "Ceo", "SuperAdmin", "Admin"));
 
                 options.AddPolicy("CEO",
-                    p => p.RequireClaim(ClaimTypes.Role, "CEO"));
+                    p => p.RequireClaim(ClaimTypes.Role, "Ceo"));
 
                 options.AddPolicy("User",
                     p => p.RequireClaim(ClaimTypes.Role, "User"));
