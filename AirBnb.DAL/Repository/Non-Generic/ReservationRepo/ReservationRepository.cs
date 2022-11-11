@@ -26,6 +26,7 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
         public async Task<Reservation> CreateReservationToAUser(Reservation reservation)
         {
             _context.Reservations.Add(reservation); 
+            
             return reservation;
         }
 
@@ -38,32 +39,15 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
             return hosterResevations.Where(e => (DateTime.Compare(e.StartDate.Date, todaysDate) == 0 || DateTime.Compare(e.StartDate.Date, todaysDate) == -1) && (DateTime.Compare(e.EndDate.Date, todaysDate) == 0 || DateTime.Compare(e.EndDate.Date, todaysDate) == 1));
         }
 
-        public async Task<double> GetAllReservationsBalance(string hosterId, DateTime? startDate, DateTime? endDate)
+        public async Task<double> GetAllReservationsBalance(string hosterId)
         {
             
             // get all propertiesID that belongs to host with hostid = hosterId
             var HostProperties = await _context.Properties.Where(e => e.HosterId == hosterId).Select(e=>e.Id).ToListAsync();
             List<Reservation> propertiesReservation = new List<Reservation>();
-            if (startDate == null && endDate == null) // all time intervall
-            {
-                 propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId)).ToListAsync();
+            propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId)).ToListAsync();
 
-            }
-            else if(startDate == null)  // get all reservation that belongs to this properties where it was reserved ( start date) between  ( property creation & the given end date) 
-            {
-                 propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId) && (DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == -1)).ToListAsync();
-                
-            }
-            else if(endDate == null)// get all reservation that belongs to this properties where it was reserved ( start date) between ( the given start date & and any time forward)
-            {
-                 propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId) && (DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 1)).ToListAsync();
-                
-            }
-            else    // get all reservation that belongs to this properties where it was reserved ( start date) in any time between the given interval 
-
-            {
-                 propertiesReservation = await _context.Reservations.Where(e => HostProperties.Contains(e.PropertyId) && (DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, startDate.Value.Date) == -1) && (DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == 0 || DateTime.Compare(e.StartDate.Date, endDate.Value.Date) == -1)).ToListAsync();
-            } 
+           
             double balance = 0;
             foreach (var reservation in propertiesReservation)
             {

@@ -98,11 +98,9 @@ namespace AirBnb.BL.Managers.ManageReservation
         //Getting the total balance of the hoster reservations
         public async Task<double> GetAllReservationsBalance(ReservationHosterBalanceDto model)
         {
-            if(model.StartDate==null||model.EndDate==null)
-            {
-                return await _reservationrepository.GetAllReservationsBalance(model.Id,null,null);
-            }
-            return await _reservationrepository.GetAllReservationsBalance(model.Id, model.StartDate, model.EndDate);
+           
+                return await _reservationrepository.GetAllReservationsBalance(model.Id);
+       
         }
         //Getting the total balance of the reservations on a property
 

@@ -41,7 +41,7 @@ namespace AirBnb.DAL.Repository.Non_Generic.ReservationRepo
         //Get the balance of reservations
         //Getting the total balance of all properties to a specific user
         //if there is no date or time sent
-        Task<double> GetAllReservationsBalance(string hosterId, DateTime? startDate, DateTime? endDate);
+        Task<double> GetAllReservationsBalance(string hosterId);
         //Getting specific property balance
         Task<double> GetSpecificPropertyReservationsBalance(Guid propertyId, DateTime? startDate, DateTime? endDate);
         //user section
